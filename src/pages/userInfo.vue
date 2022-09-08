@@ -1,10 +1,10 @@
 <template>
-  <div id="home">首页</div>
+  <div id="userInfo">用户信息</div>
 </template>
 
 <script>
 export default {
-  name: 'home',
+  name: 'userInfo',
   data() {
     return {};
   },
