@@ -2,7 +2,16 @@
   <div id="adminHome">
     <el-container style="height: 500px; border: 1px solid #eee">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu :default-openeds="['1']" router :default-active="this.$router.path">
+        <el-menu
+          :default-openeds="0"
+          router
+          :default-active="$router.path"
+          active-text-color="#027aff"
+        >
+          <el-menu-item index="/adminHome/index">
+            <i class="el-icon-menu"></i>
+            <span slot="title">首页</span>
+          </el-menu-item>
           <el-submenu v-for="(item, i) in navList" :key="i" :index="i">
             <template slot="title">
               <i class="el-icon-location"></i>
@@ -56,6 +65,9 @@ export default {
         { title: '电影中心', children: [{ path: '/adminHome/filmCenter', title: '电影信息' }] },
       ],
     };
+  },
+  created() {
+    this.$router.path = '/adminHome/index';
   },
 };
 </script>
