@@ -4,7 +4,7 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-import Home from '../pages/admin/home';
+import Home from '../pages/home';
 import adminHome from '../pages/admin/adminHome';
 import userInfo from '../pages/admin/userInfo';
 import filmCenter from '../pages/admin/filmCenter';
