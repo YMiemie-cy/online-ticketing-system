@@ -29,7 +29,8 @@
         >
           <el-form-item prop="email">
             <el-input v-model="ruleForm.email" placeholder="请输入邮箱"></el-input>
-            <el-link :underline="false" @click="">发送验证码</el-link>
+            <!-- <el-link :underline="false" @click="sendEmail" ref="eleCode">111</el-link> -->
+            <input type="button" :value="codeText" @click="codeTimer" ref="elecode" ></input>
           </el-form-item>
           <el-form-item prop="pass">
             <el-input type="password" v-model="ruleForm.pass" placeholder="请输入密码"></el-input>
@@ -43,12 +44,22 @@
           </el-form-item>
         </el-form>
       </div>
+      <form ref="form" v-show="false">
+        <label>from_name</label>
+        <input type="text" name="from_name" value="LingYi" />
+        <label>to_name</label>
+        <input type="text" name="to_name" value="390017890@qq.com" />
+        <label>Message</label>
+        <input type="text" name="message" :value="code" />
+      </form>
     </div>
   </div>
 </template>
 
 <script>
 import { getLogin, postReg } from '../api';
+import emailjs from '@emailjs/browser';
+
 export default {
   name: 'login',
   data() {
@@ -76,10 +87,14 @@ export default {
     var checkCode = (rule, value, callback) => {
       if (!value) {
         callback(new Error('验证码不能为空'));
+      }else{
+        if (value == this.code) {
+          callback();
+        }else{
+          callback(new Error('验证码有误'));
+        } 
       }
-      if (value == 123456) {
-        callback();
-      }
+      
     };
 
     return {
@@ -102,9 +117,14 @@ export default {
         code: [{ required: true, validator: checkCode, trigger: 'blur' }],
         email: [{ required: true, validator: validateEmail, trigger: 'blur' }],
       },
+      codeText: '发送验证码',
+      code: ''
     };
   },
   created() {},
+  mounted() {
+  
+  },
   methods: {
     async log() {
       const res = await getLogin({
@@ -130,6 +150,37 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+    sendEmail() {
+      this.codeTimer();
+      // emailjs
+      //   .sendForm('service_pkon8ni', 'template_6fs6slm', this.$refs.form, 'WEXETXzwjHGVTHR3U')
+      //   .then(
+      //     result => {
+      //       console.log('SUCCESS!', result.text);
+      //     },
+      //     error => {
+      //       console.log('FAILED...', error.text);
+      //     }
+      //   );
+
+      
+    },
+    codeTimer() {
+      let time = 10;
+      this.$refs.elecode.setAttribute('disabled','true')
+      this.code = parseInt(Math.random()*10000);
+      console.log(this.code);
+      const timer =  setInterval(() => {
+        this.codeText = `重新发送时间${time}s`;
+        time--;
+        if(time < 0){
+          clearInterval(timer)
+          time = 60;
+          this.codeText = '发送验证码'
+          this.$refs.elecode.removeAttribute('disabled')
+        }
+      }, 1000);
     },
   },
 };

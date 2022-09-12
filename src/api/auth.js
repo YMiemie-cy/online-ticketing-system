@@ -5,7 +5,7 @@ export const getLogin = async ({
     username,
     password
   }) =>
-  axios.get("/login", {
+  axios.get("/login?apipost_id=e2c35b", {
     params: {
       username,
       password

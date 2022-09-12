@@ -2,16 +2,10 @@
   <div id="home">
     <el-container>
       <el-header>
-        <el-menu
-          :default-active="activeIndex"
-          class="el-menu-demo"
-          mode="horizontal"
-          @select="handleSelect"
-        >
-          <el-menu-item index="1">首页</el-menu-item>
-          <el-menu-item index="2">电影</el-menu-item>
-          <el-menu-item index="3">处理中心</el-menu-item>
-          <el-menu-item index="4">处理中心</el-menu-item>
+        <el-menu :default-active="'/home/index'" class="el-menu-demo" mode="horizontal" router>
+          <el-menu-item v-for="(item, i) in navList" :index="item.path" :key="i">
+            {{ item.title }}
+          </el-menu-item>
           <el-submenu index="5" class="userCenter">
             <template slot="title">
               <el-avatar
@@ -36,15 +30,20 @@
 export default {
   name: 'home',
   data() {
-    return {};
+    return {
+      navList: [
+        { title: '首页', path: '/home/index' },
+        { title: '分类', path: '/home/classification' },
+      ],
+    };
   },
 };
 </script>
 
 <style scoped>
 .el-container {
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 .el-footer {
   color: #fff;

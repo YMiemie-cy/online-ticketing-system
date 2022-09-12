@@ -10,18 +10,37 @@ import userInfo from '../pages/admin/userInfo';
 import filmCenter from '../pages/admin/filmCenter';
 import Login from '../pages/login';
 import adminIndex from '../pages/admin/index';
+import Index from '../pages/index';
+import classification from '../pages/classification';
 
 
 let routes = [{
     path: '/',
-    redirect: '/home'
+    redirect: '/home/index'
   },
+
   {
     path: '/home',
+    redirect: '/home/index',
     component: Home,
     meta: {
       title: 'xx电影'
-    }
+    },
+    children: [{
+        path: 'index',
+        component: Index,
+        meta: {
+          title: 'xx电影'
+        },
+      },
+      {
+        path: 'classification',
+        component: classification,
+        meta: {
+          title: '影院热映大片_热映电影票房_高清电影影视大全-xx电影'
+        },
+      }
+    ]
 
   },
   {

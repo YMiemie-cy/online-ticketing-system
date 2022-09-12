@@ -7,9 +7,11 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.7.0",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "element-ui": "^2.15.9",
+    "emailjs-com": "^3.2.0",
     "nodemailer": "^6.7.8",
     "nodemailer-smtp-transport": "^2.7.4",
     "vant": "^2.12.49",
