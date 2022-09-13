@@ -2,7 +2,7 @@
   <div id="movieList">
     电影列表
     <el-row>
-      <el-col :span="6" v-for="(o, index) in movieList" :key="o">
+      <el-col :span="6" v-for="(o, index) in movieList" :key="index">
         <el-card shadow="hover">
           <img
             src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"

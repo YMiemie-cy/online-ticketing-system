@@ -2,8 +2,8 @@
   <div id="home">
     <el-container>
       <el-header>
-        <el-menu :default-active="'/home/index'" class="el-menu-demo" mode="horizontal" router>
-          <el-menu-item v-for="(item, i) in navList" :index="item.path" :key="i">
+        <el-menu :default-active="active" class="el-menu-demo" mode="horizontal" router>
+          <el-menu-item v-for="(item, i) in navList" :index="item.path" :key="item.path">
             {{ item.title }}
           </el-menu-item>
           <el-submenu index="5" class="userCenter">
@@ -12,9 +12,8 @@
                 src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
               ></el-avatar>
             </template>
-            <el-menu-item index="5-1">选项1</el-menu-item>
-            <el-menu-item index="5-2">选项2</el-menu-item>
-            <el-menu-item index="5-3">选项3</el-menu-item>
+            <el-menu-item index="user">个人中心</el-menu-item>
+            <el-menu-item index="5-2">退出</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-header>
@@ -35,7 +34,17 @@ export default {
         { title: '首页', path: '/home/index' },
         { title: '分类', path: '/home/classification' },
       ],
+      active: '',
     };
+  },
+  watch: {
+    $route: {
+      handler(newName, oldName) {
+        this.active = newName.fullPath;
+      },
+      immediate: true,
+      // deep: true
+    },
   },
 };
 </script>

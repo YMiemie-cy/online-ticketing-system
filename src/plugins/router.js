@@ -12,6 +12,8 @@ import Login from '../pages/login';
 import adminIndex from '../pages/admin/index';
 import Index from '../pages/index';
 import classification from '../pages/classification';
+import User from '../pages/user';
+
 
 
 let routes = [{
@@ -38,6 +40,13 @@ let routes = [{
         component: classification,
         meta: {
           title: '影院热映大片_热映电影票房_高清电影影视大全-xx电影'
+        },
+      },
+      {
+        path: 'user',
+        component: User,
+        meta: {
+          title: '用户中心'
         },
       }
     ]
