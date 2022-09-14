@@ -13,7 +13,7 @@
               ></el-avatar>
             </template>
             <el-menu-item index="user">个人中心</el-menu-item>
-            <el-menu-item index="5-2">退出</el-menu-item>
+            <el-menu-item>退出</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-header>

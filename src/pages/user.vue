@@ -2,8 +2,23 @@
   <div id="user">
     用户中心
     <el-container>
-      <el-aside width="200px">Aside</el-aside>
-      <el-main>Main</el-main>
+      <el-aside width="200px">
+        <el-menu
+          :default-active="active"
+          class="el-menu-vertical-demo"
+          @open="handleOpen"
+          @close="handleClose"
+          router
+        >
+          <el-menu-item v-for="(item, i) in list" :index="item.path" :key="i">
+            <i class="el-icon-setting"></i>
+            <span slot="title">{{ item.title }}</span>
+          </el-menu-item>
+        </el-menu>
+      </el-aside>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </div>
 </template>
@@ -12,9 +27,28 @@
 export default {
   name: 'user',
   data() {
-    return {};
+    return {
+      active: '',
+      list: [
+        { title: '订单详情', path: '/home/user/orderDetails' },
+        { title: '收藏', path: '/home/user/collection' },
+      ],
+    };
+  },
+  watch: {
+    $route: {
+      handler(newName, oldName) {
+        this.active = newName.fullPath;
+      },
+      immediate: true,
+    },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.el-main {
+  width: 100vw;
+  height: 83vh;
+}
+</style>

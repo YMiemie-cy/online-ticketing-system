@@ -13,6 +13,9 @@ import adminIndex from '../pages/admin/index';
 import Index from '../pages/index';
 import classification from '../pages/classification';
 import User from '../pages/user';
+import OrderDetails from '../pages/orderDetails';
+import Collection from '../pages/collection';
+import MovieDetail from '../pages/movieDetail';
 
 
 
@@ -45,8 +48,31 @@ let routes = [{
       {
         path: 'user',
         component: User,
+        redirect: 'user/orderDetails',
         meta: {
           title: '用户中心'
+        },
+        children: [{
+            path: 'orderDetails',
+            component: OrderDetails,
+            meta: {
+              title: '用户中心'
+            },
+          },
+          {
+            path: 'collection',
+            component: Collection,
+            meta: {
+              title: '收藏'
+            },
+          }
+        ]
+      },
+      {
+        path: 'detail/:id',
+        component: MovieDetail,
+        meta: {
+          title: '电影详情'
         },
       }
     ]

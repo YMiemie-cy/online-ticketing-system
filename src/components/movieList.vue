@@ -3,7 +3,7 @@
     电影列表
     <el-row>
       <el-col :span="6" v-for="(o, index) in movieList" :key="index">
-        <el-card shadow="hover">
+        <el-card shadow="hover" @click.native="$root.$emit('showDetail', $event)">
           <img
             src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
             class="image"
@@ -48,20 +48,21 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 #movieList {
   height: 100%;
   width: 70%;
-}
-#movieList >>> .el-card {
-  position: relative;
+  /deep/ .el-card {
+    position: relative;
 
-  height: 260px;
-  width: 160px;
+    height: 260px;
+    width: 160px;
+  }
+  /deep/ .el-card__body {
+    padding: 0;
+  }
 }
-#movieList >>> .el-card__body {
-  padding: 0;
-}
+
 .image {
   width: 100%;
   height: 220px;
@@ -76,13 +77,16 @@ export default {
   font-size: 16px;
   color: #fff;
   padding: 5px;
+
+  span:nth-of-type(1) {
+    float: left;
+  }
+
+  span:nth-of-type(2) {
+    float: right;
+  }
 }
-.bottom span:nth-of-type(1) {
-  float: left;
-}
-.bottom span:nth-of-type(2) {
-  float: right;
-}
+
 .buy {
   width: 100%;
   height: 44px;

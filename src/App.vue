@@ -8,6 +8,11 @@
 export default {
   name: 'App',
   components: {},
+  created() {
+    this.$root.$on('showDetail', $event => {
+      console.log('hello', $event);
+    });
+  },
 };
 </script>
 
