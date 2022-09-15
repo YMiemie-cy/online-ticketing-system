@@ -5,7 +5,7 @@
     </div>
     <div class="main">
       <el-menu
-        default-active="1"
+        :default-active="active"
         class="el-menu-vertical-demo"
         @select="handleSelect"
         mode="horizontal"
@@ -21,10 +21,33 @@
         </el-menu-item>
       </el-menu>
 
-      <el-main>
-        <div v-show="active === '1'">111</div>
-        <div v-show="active === '2'">222</div>
-        <div v-show="active === '3'">333</div>
+      <el-main class="bot-main">
+        <div v-show="active === '1'">
+          <div>
+            <div>
+              <h2>剧情介绍</h2>
+            </div>
+            <p>
+              商周之战一千五百年后，天界衰落，蒙冤落魄的杨戬以赏银捕手为业谋生。一日，杨戬接受了一位神秘访客的赏银去追捕一位少年，意外发现少年竟是自己的亲外甥沉香。沉香立志要寻回宝莲灯，劈山救母，却将酿成大祸。杨戬踏上追寻沉香并揭开尘封往事的旅程……
+            </p>
+          </div>
+          <div>
+            <div>
+              <h2>演职人员</h2>
+              <div><el-link type="info" @click="active = '2'">更多></el-link></div>
+            </div>
+            <div>xxxxxxxxxxxxxxxxxxxxx</div>
+          </div>
+          <div>
+            <div>
+              <h2>图集</h2>
+              <div><el-link type="info" @click="active = '3'">更多></el-link></div>
+            </div>
+            <div>xxxxxxxxxxxxxxxxxxxxx</div>
+          </div>
+        </div>
+        <div v-show="active === '2'">2222222222</div>
+        <div v-show="active === '3'">3333333333</div>
       </el-main>
     </div>
   </div>
@@ -36,7 +59,7 @@ export default {
   name: 'movieDetail',
   data() {
     return {
-      active: 1,
+      active: '1',
     };
   },
   methods: {
@@ -48,4 +71,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.bot-main {
+  > div > div > div {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+</style>
