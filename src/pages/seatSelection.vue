@@ -1,7 +1,44 @@
 <template>
   <div id="seatSelection">
-    <BigPicture />
+    <BigPicture>
+      <div>
+        <div class="left">
+          <img src="../assets/logo.png" alt="" />
+        </div>
+        <div class="right">
+          <div class="top">
+            <p>{{ name }}</p>
+            <p>{{ Classification }}</p>
+            <p>{{ time }}</p>
+            <p>{{ date }}</p>
+          </div>
+          <div class="bottom">
+            <div class="btn">
+              <el-button @click="viewDetails">查看更多电影详情</el-button>
+            </div>
+            <div class="score">口碑、票房</div>
+          </div>
+        </div>
+      </div>
+    </BigPicture>
+
     <ClassificationBar :list="seatList" />
+
+    <div id="cinemaList">
+      <h4 class="top">影院列表</h4>
+      <div class="main">
+        <div v-for="(item, i) in cinemaList">
+          <div class="left">
+            <p>{{ item.name }}</p>
+            <p>{{ item.address }}</p>
+          </div>
+          <div class="right">
+            <div>{{ item.price }}</div>
+            <el-button @click="selectVenue">选座购票</el-button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -12,6 +49,10 @@ export default {
   name: 'seatSelection',
   data() {
     return {
+      name: '新神榜：杨戬',
+      Classification: '动画 冒险 动作',
+      time: '中国大陆/127分钟',
+      date: '2022-08-19 09:00中国大陆上映',
       seatList: [
         {
           title: '日期',
@@ -32,10 +73,8 @@ export default {
             '保利万和国际影城',
             '卢米埃影城',
             '星光影城',
-
             '金逸影城',
             'EVO艺威影院',
-
             '幸福蓝海国际影城',
             '中影南方国际影城',
             '苏宁影城',
@@ -141,10 +180,78 @@ export default {
           children: ['全部', '可改签', '可退票'],
         },
       ],
+      cinemaList: [
+        {
+          name: '365影院（甜筒xxxxx）',
+          address: '地址：xxxxxxxxxxxxxxxxxxxxx',
+          price: '50',
+        },
+        {
+          name: '365影院（甜筒xxxxx）',
+          address: '地址：xxxxxxxxxxxxxxxxxxxxx',
+          price: '50',
+        },
+        {
+          name: '365影院（甜筒xxxxx）',
+          address: '地址：xxxxxxxxxxxxxxxxxxxxx',
+          price: '50',
+        },
+        {
+          name: '365影院（甜筒xxxxx）',
+          address: '地址：xxxxxxxxxxxxxxxxxxxxx',
+          price: '50',
+        },
+        {
+          name: '365影院（甜筒xxxxx）',
+          address: '地址：xxxxxxxxxxxxxxxxxxxxx',
+          price: '50',
+        },
+      ],
     };
   },
   components: { BigPicture, ClassificationBar },
+  methods: {
+    buy() {
+      this.buyTickets = true;
+    },
+    viewDetails() {
+      this.$router.push('/home/detail/1');
+    },
+    selectVenue() {
+      this.$router.push('/home/selectVenue/1');
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#cinemaList {
+  width: 100%;
+  .top {
+    height: 30px;
+    width: 100%;
+  }
+  /deep/.main div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    border-bottom: dashed 1px #ededed;
+    .left {
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: flex-start;
+
+      p {
+        margin: 0;
+      }
+    }
+    .right {
+      width: 150px;
+    }
+  }
+}
+</style>

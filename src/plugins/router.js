@@ -17,6 +17,7 @@ import OrderDetails from '../pages/orderDetails';
 import Collection from '../pages/collection';
 import MovieDetail from '../pages/movieDetail';
 import SeatSelection from '../pages/seatSelection';
+import SelectVenue from '../pages/selectVenue';
 
 
 
@@ -82,6 +83,14 @@ let routes = [{
         meta: {
           title: '选座'
         },
+
+      },
+      {
+        path: 'selectVenue/:id',
+        component: SelectVenue,
+        meta: {
+          title: '选座'
+        }
       }
     ]
 

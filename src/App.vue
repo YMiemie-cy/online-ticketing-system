@@ -11,6 +11,7 @@ export default {
   created() {
     this.$root.$on('showDetail', $event => {
       console.log('hello', $event);
+      this.$router.push('/home/detail/1');
     });
   },
 };

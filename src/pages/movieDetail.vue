@@ -1,7 +1,27 @@
 <template>
   <div id="movieDetail">
     <div class="top">
-      <BigPicture />
+      <BigPicture>
+        <div>
+          <div class="left">
+            <img src="../assets/logo.png" alt="" />
+          </div>
+          <div class="right">
+            <div class="top">
+              <p>{{ name }}</p>
+              <p>{{ Classification }}</p>
+              <p>{{ time }}</p>
+              <p>{{ date }}</p>
+            </div>
+            <div class="bottom">
+              <div class="btn">
+                <el-button @click="buy">特惠购票</el-button>
+              </div>
+              <div class="score">口碑、票房</div>
+            </div>
+          </div>
+        </div>
+      </BigPicture>
     </div>
     <div class="main">
       <el-menu
@@ -60,9 +80,16 @@ export default {
   data() {
     return {
       active: '1',
+      name: '新神榜：杨戬',
+      Classification: '动画 冒险 动作',
+      time: '中国大陆/127分钟',
+      date: '2022-08-19 09:00中国大陆上映',
     };
   },
   methods: {
+    buy() {
+      this.$router.push('/home/seatSelection/1');
+    },
     handleSelect(key, keyPath) {
       this.active = key;
     },
