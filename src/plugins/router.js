@@ -18,6 +18,9 @@ import Collection from '../pages/collection';
 import MovieDetail from '../pages/movieDetail';
 import SeatSelection from '../pages/seatSelection';
 import SelectVenue from '../pages/selectVenue';
+import Payment from '../pages/payment';
+import Step2 from '../pages/step2';
+import Step3 from '../pages/step3';
 
 
 
@@ -91,6 +94,28 @@ let routes = [{
         meta: {
           title: '选座'
         }
+      },
+      {
+        path: 'payment/:id',
+        component: Payment,
+        meta: {
+          title: '支付'
+        },
+        children: [{
+            path: 'step2',
+            component: Step2,
+            meta: {
+              title: '支付'
+            },
+          },
+          {
+            path: 'step3',
+            component: Step3,
+            meta: {
+              title: '支付'
+            },
+          }
+        ]
       }
     ]
 

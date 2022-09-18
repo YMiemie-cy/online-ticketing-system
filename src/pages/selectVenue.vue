@@ -37,18 +37,18 @@
       <div class="bottom">
         <div class="time">
           观影时间:
-          <el-button v-for="(item, i) in tableData" @click="btn($event)" :key="i">
+          <button v-for="(item, i) in tableData" @click="btn($event)" :data-key="i">
             {{ item.date }}
-          </el-button>
+          </button>
         </div>
         <div class="venue">
-          <el-table :data="tableData[0].children" style="width: 100%">
+          <el-table :data="tableData[index].children" style="width: 100%">
             <el-table-column prop="time" label="放映时间"></el-table-column>
             <el-table-column prop="language" label="语言版本"></el-table-column>
             <el-table-column prop="room" label="放映厅"></el-table-column>
             <el-table-column prop="price" label="售价（元）"></el-table-column>
             <el-table-column label="选座购票">
-              <el-button>选座购票</el-button>
+              <el-button @click="goPayment">选座购票</el-button>
             </el-table-column>
           </el-table>
         </div>
@@ -67,6 +67,7 @@ export default {
       Classification: '动画 冒险 动作',
       time: '中国大陆/127分钟',
       date: '2022-08-19 09:00中国大陆上映',
+      index: 0,
       contentList: {
         name: '新神榜：杨戬',
         rating: '8.8分',
@@ -80,12 +81,12 @@ export default {
           children: [{ time: '16:15', language: '中文2D', room: 'xxxx', price: '￥43' }],
         },
         {
-          date: '今天9月16',
-          children: [{ time: '16:15', language: '中文2D', room: 'xxxx', price: '￥43' }],
+          date: '今天9月17',
+          children: [{ time: '17:15', language: '中文3D', room: 'xxxx', price: '￥23' }],
         },
         {
-          date: '今天9月16',
-          children: [{ time: '16:15', language: '中文2D', room: 'xxxx', price: '￥43' }],
+          date: '今天9月18',
+          children: [{ time: '18:15', language: '中文2D', room: 'xxxx', price: '￥13' }],
         },
       ],
     };
@@ -95,8 +96,12 @@ export default {
     console.log(this.tableData[0].children[0]);
   },
   methods: {
-    btn(event) {
-      console.log(event);
+    btn(e) {
+      // console.log(e.target.getAttribute('data-key'));
+      this.index = parseInt(e.target.getAttribute('data-key'));
+    },
+    goPayment() {
+      this.$router.push('/home/payment/1/step2');
     },
   },
 };
