@@ -1,6 +1,12 @@
 <template>
   <div id="step2">
-    <ProgressBar />
+    <ProgressBar>
+      <div class="step">
+        <span class="step-num">3</span>
+        <div class="bar"></div>
+        <span class="step-text">14分钟内付款</span>
+      </div>
+    </ProgressBar>
     <div class="main">
       <div class="left">
         <div class="seat-example">
@@ -26,15 +32,7 @@
           data-seq-no="202209190210144"
         >
           <div class="row-id-container">
-            <span class="row-id">1</span>
-            <span class="row-id">2</span>
-            <span class="empty-row-id"></span>
-            <span class="row-id">3</span>
-            <span class="row-id">4</span>
-            <span class="row-id">5</span>
-            <span class="row-id">6</span>
-            <span class="row-id">7</span>
-            <span class="row-id">8</span>
+            <span class="row-id" v-for="(item, i) in seatList">{{ i + 1 }}</span>
           </div>
 
           <div class="seats-container">
@@ -43,960 +41,19 @@
               <div class="c-screen-line"></div>
             </div>
 
-            <div class="seats-wrapper">
-              <div class="row">
-                <span
-                  class="seat selectable"
-                  data-column-id="13"
-                  data-row-id="1"
-                  data-no="6483"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="12"
-                  data-row-id="1"
-                  data-no="6484"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="11"
-                  data-row-id="1"
-                  data-no="6485"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="10"
-                  data-row-id="1"
-                  data-no="6486"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="9"
-                  data-row-id="1"
-                  data-no="6487"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="8"
-                  data-row-id="1"
-                  data-no="6488"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="7"
-                  data-row-id="1"
-                  data-no="6489"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="6"
-                  data-row-id="1"
-                  data-no="6490"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="5"
-                  data-row-id="1"
-                  data-no="6491"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="4"
-                  data-row-id="1"
-                  data-no="6492"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="3"
-                  data-row-id="1"
-                  data-no="6493"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="2"
-                  data-row-id="1"
-                  data-no="6494"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="1"
-                  data-row-id="1"
-                  data-no="6495"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-              </div>
-              <div class="row">
-                <span
-                  class="seat selectable"
-                  data-column-id="13"
-                  data-row-id="2"
-                  data-no="6496"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="12"
-                  data-row-id="2"
-                  data-no="6497"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="11"
-                  data-row-id="2"
-                  data-no="6498"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="10"
-                  data-row-id="2"
-                  data-no="6499"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="9"
-                  data-row-id="2"
-                  data-no="6500"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="8"
-                  data-row-id="2"
-                  data-no="6501"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="7"
-                  data-row-id="2"
-                  data-no="6502"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="6"
-                  data-row-id="2"
-                  data-no="6503"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="5"
-                  data-row-id="2"
-                  data-no="6504"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="4"
-                  data-row-id="2"
-                  data-no="6505"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="3"
-                  data-row-id="2"
-                  data-no="6506"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="2"
-                  data-row-id="2"
-                  data-no="6507"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="1"
-                  data-row-id="2"
-                  data-no="6508"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-              </div>
-              <div class="empty-row"></div>
-              <div class="row">
-                <span
-                  class="seat selectable"
-                  data-column-id="13"
-                  data-row-id="3"
-                  data-no="6522"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="12"
-                  data-row-id="3"
-                  data-no="6523"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="11"
-                  data-row-id="3"
-                  data-no="6524"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="10"
-                  data-row-id="3"
-                  data-no="6525"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="9"
-                  data-row-id="3"
-                  data-no="6526"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="8"
-                  data-row-id="3"
-                  data-no="6527"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="7"
-                  data-row-id="3"
-                  data-no="6528"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="6"
-                  data-row-id="3"
-                  data-no="6529"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="5"
-                  data-row-id="3"
-                  data-no="6530"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="4"
-                  data-row-id="3"
-                  data-no="6531"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="3"
-                  data-row-id="3"
-                  data-no="6532"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="2"
-                  data-row-id="3"
-                  data-no="6533"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="1"
-                  data-row-id="3"
-                  data-no="6534"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-              </div>
-              <div class="row">
-                <span
-                  class="seat selectable"
-                  data-column-id="13"
-                  data-row-id="4"
-                  data-no="6535"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="12"
-                  data-row-id="4"
-                  data-no="6536"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="11"
-                  data-row-id="4"
-                  data-no="6537"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="10"
-                  data-row-id="4"
-                  data-no="6538"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="9"
-                  data-row-id="4"
-                  data-no="6539"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="8"
-                  data-row-id="4"
-                  data-no="6540"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="7"
-                  data-row-id="4"
-                  data-no="6541"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="6"
-                  data-row-id="4"
-                  data-no="6542"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="5"
-                  data-row-id="4"
-                  data-no="6543"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="4"
-                  data-row-id="4"
-                  data-no="6544"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="3"
-                  data-row-id="4"
-                  data-no="6545"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="2"
-                  data-row-id="4"
-                  data-no="6546"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="1"
-                  data-row-id="4"
-                  data-no="6547"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-              </div>
-              <div class="row">
-                <span
-                  class="seat selectable"
-                  data-column-id="13"
-                  data-row-id="5"
-                  data-no="6548"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="12"
-                  data-row-id="5"
-                  data-no="6549"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="11"
-                  data-row-id="5"
-                  data-no="6550"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="10"
-                  data-row-id="5"
-                  data-no="6551"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="9"
-                  data-row-id="5"
-                  data-no="6552"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="8"
-                  data-row-id="5"
-                  data-no="6553"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="7"
-                  data-row-id="5"
-                  data-no="6554"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="6"
-                  data-row-id="5"
-                  data-no="6555"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="5"
-                  data-row-id="5"
-                  data-no="6556"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="4"
-                  data-row-id="5"
-                  data-no="6557"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="3"
-                  data-row-id="5"
-                  data-no="6558"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="2"
-                  data-row-id="5"
-                  data-no="6559"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="1"
-                  data-row-id="5"
-                  data-no="6560"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-              </div>
-              <div class="row">
-                <span
-                  class="seat selectable"
-                  data-column-id="13"
-                  data-row-id="6"
-                  data-no="6561"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="12"
-                  data-row-id="6"
-                  data-no="6562"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="11"
-                  data-row-id="6"
-                  data-no="6563"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="10"
-                  data-row-id="6"
-                  data-no="6564"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="9"
-                  data-row-id="6"
-                  data-no="6565"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="8"
-                  data-row-id="6"
-                  data-no="6566"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="7"
-                  data-row-id="6"
-                  data-no="6567"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="6"
-                  data-row-id="6"
-                  data-no="6568"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="5"
-                  data-row-id="6"
-                  data-no="6569"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="4"
-                  data-row-id="6"
-                  data-no="6570"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="3"
-                  data-row-id="6"
-                  data-no="6571"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="2"
-                  data-row-id="6"
-                  data-no="6572"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="1"
-                  data-row-id="6"
-                  data-no="6573"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-              </div>
-              <div class="row">
-                <span
-                  class="seat selectable"
-                  data-column-id="13"
-                  data-row-id="7"
-                  data-no="6574"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="12"
-                  data-row-id="7"
-                  data-no="6575"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="11"
-                  data-row-id="7"
-                  data-no="6576"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="10"
-                  data-row-id="7"
-                  data-no="6577"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="9"
-                  data-row-id="7"
-                  data-no="6578"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="8"
-                  data-row-id="7"
-                  data-no="6579"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="7"
-                  data-row-id="7"
-                  data-no="6580"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="6"
-                  data-row-id="7"
-                  data-no="6581"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat sold"
-                  data-column-id="5"
-                  data-row-id="7"
-                  data-no="6582"
-                  data-st="LK"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="4"
-                  data-row-id="7"
-                  data-no="6583"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="3"
-                  data-row-id="7"
-                  data-no="6584"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="2"
-                  data-row-id="7"
-                  data-no="6585"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="1"
-                  data-row-id="7"
-                  data-no="6586"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-              </div>
-              <div class="row">
-                <span
-                  class="seat selectable"
-                  data-column-id="13"
-                  data-row-id="8"
-                  data-no="6587"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="12"
-                  data-row-id="8"
-                  data-no="6588"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="11"
-                  data-row-id="8"
-                  data-no="6589"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="10"
-                  data-row-id="8"
-                  data-no="6590"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="9"
-                  data-row-id="8"
-                  data-no="6591"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="8"
-                  data-row-id="8"
-                  data-no="6592"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="7"
-                  data-row-id="8"
-                  data-no="6593"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="6"
-                  data-row-id="8"
-                  data-no="6594"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="5"
-                  data-row-id="8"
-                  data-no="6595"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="4"
-                  data-row-id="8"
-                  data-no="6596"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="3"
-                  data-row-id="8"
-                  data-no="6597"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="2"
-                  data-row-id="8"
-                  data-no="6598"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-                <span
-                  class="seat selectable"
-                  data-column-id="1"
-                  data-row-id="8"
-                  data-no="6599"
-                  data-st="N"
-                  data-act="seat-click"
-                  data-bid="b_s7eiiijf"
-                ></span>
-              </div>
+            <div class="seats-main">
+              <table cellspacing="0">
+                <tr v-for="(tr, index) in seatList">
+                  <td
+                    v-for="(td, i) in tr"
+                    @click="seatClick($event, index, i)"
+                    :class="td"
+                    :key="i"
+                  >
+                    {{ i + 1 }}
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>
@@ -1016,10 +73,19 @@
           <p>版本 :</p>
           <p>场次 :</p>
           <p>票价 :</p>
-          <p>座位 :</p>
+          <div>
+            座位 :
+            <template v-for="(itemIndex, index) of seatList">
+              <template v-for="(item, i) of itemIndex">
+                <div class="ticket" v-if="item === 'selected'">
+                  {{ `${index + 1}排${i + 1}座` }}
+                </div>
+              </template>
+            </template>
+          </div>
           <p>总价 : ￥</p>
         </div>
-        <el-button>确认选座</el-button>
+        <el-button @click="goStep3">确认选座</el-button>
       </div>
     </div>
   </div>
@@ -1030,9 +96,38 @@ import ProgressBar from '../components/progressBar.vue';
 export default {
   name: 'step2',
   data() {
-    return {};
+    return {
+      seatList: [
+        ['false', 'false', 'false', 'false', 'false', 'false'],
+        ['false', 'false', 'false', 'false', 'false', 'false'],
+        ['false', 'false', 'true', 'false', 'false', 'false'],
+        ['false', 'false', 'false', 'false', 'false', 'false'],
+        ['false', 'false', 'false', 'true', 'false', 'false'],
+      ],
+    };
+  },
+  created() {
+    // for (let item of this.seatList) {
+    //   console.log(item);
+    // }
   },
   components: { ProgressBar },
+  methods: {
+    seatClick(e, tr, td) {
+      if (e.target.classList[0] === 'false') {
+        e.target.classList = 'selected';
+        // console.log(this.seatList[tr][td]);
+        // this.seatList[tr][td] = 'selected';
+        this.$set(this.seatList[tr], td, 'selected');
+      } else if (e.target.classList[0] === 'selected') {
+        e.target.classList = 'false';
+        this.$set(this.seatList[tr], td, 'false');
+      }
+    },
+    goStep3() {
+      this.$router.push('/home/payment/1/step3');
+    },
+  },
 };
 </script>
 
@@ -1055,7 +150,7 @@ export default {
         background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAaCAYAAACgoey0AAAAAXNSR0IArs4c6QAAAoxJREFUSA3Fls9LFGEYx78z7rq7WuEiQqEVi1SHwjrVSU9aghURJYa2UUgd+nEuKAg6dK7cQ6FSCYrdosK/oFupFF46CLkFBZm7s+K4P2benmfGHRx3t5nZXdln2Zl5n3me5/O+z/vMMyNhk0RfY0zL4qrQIW1SV3wpyRA+P8ZfRTGcD+bLX/CZoeF9kMiwqiIEpJXvuEZBLbANwSutNpRXIFH+tmbRBq7qMh2CWeDLoxjgnV1bNlLu4Ob+di5txuTYQ+O4lPc0wEOjmNGAicZmUpMmEQfYoVLhGMmflOo6gGPrGiYHx/CW40oE7dUFZpojPDJR6RTNcgVo2mvuj6n1flxeJGALENy54SuAv0tQJR3nZR042hBGOg9lkwAZcpFRlXuSPY1H4JODho+eoxj0zFhQ1tLCgrsgU5Ufk2kQpIkEthJkSg9VomvparuDeye+4vjuqOFDaYVsVZAtTICYoeK3bHbOg66227hw8AmWlE+Y/T3t7EAWrsFXDk+he//dgqCdrbcI+tSAxuZ7sK4lC2yKKVyD6+UGnG1/jL7IIytOZ+tNXDz0jKCfEZs/CTWXsO45Xdha5v+MXy4M4HrHO5yK3Iegn5L5RdARxFOzBO0hKD0GHsQ1OKurePHlDG50vEdv5IGBiKfmMDLX7RnKzq5TzcYMf07whT8fsJj4iFiZUI7lesVszJLV1wh+2hxUcPS04go4Ba41A5dMNXceLUONnVpfWUJdb6P1F3UvCea3ybpS1MedkvpwKFzatCTYHwL4v11Ssz2uFbiOwT8yCjy+ecvfAJU7q8Cq9PAN6r8ljQ8BQbOgOt5eoZpTD7Sjxah4/u4dnETTDj88vPq9T3A1C/mcH0p/P7R/ODnAZaZCuGEAAAAASUVORK5CYII=);
       }
       .couple-example {
-        padding-left: 77px;
+        padding-left: 77px !important;
         background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAAAaCAYAAAAOl/o1AAAAAXNSR0IArs4c6QAAAfFJREFUWAntmM1qwkAQxzffKV4KEiTgK0iLvkTPPbWv0lN76JMUeu/Jp1BB8Q2KHrzVSkg0pvNPWVnXpD25CWsG8jGThM3/t7uTzRhMsNFo9EzuU5ZljhDW9tQwjC2Jex0MBi+FIglIkqYp8VBri8Uiw6baoBWaRRim6NALOaZ5FBIva3cOrdAsCrNFp6rzMAyravqk3cNwGI/HDyAWxzHb7/cnN+oWgEZohWbS/sj15UAoMKTAW7fbZZRo2Gaz0RoKYEAjtEIz+e+TyeQDUAxKKnc0j4b9fj+/AcHdbpfTa7VacM9uy+Uyb0PV1Fmv18z3feY4v+mD9LPpdBpRkr03idJNp9OJQYubbds5HB2nDsRjmnAY0Azt7XbbpGu3Nu18y7I8DoMfcRMeVmGqRga0QJPY+VwfGBCoq0NS5Rcu/dgAkUZALYAgqfLEKr2fcrcWQJSr/qPBZqUqwWlGSANEIiC5tRghTVKVeqVObmlSxYoOS3cVq9UgCHIm+Ic6t/2npxSI53lsu0WFTS8DENd1S0WVAqG1PcN2adYkVanHawFEeqfKXJpOFuohn6vVqtJkgd9/lSWAIuJU9ccH5NuYz+duFEUoEGW0HZXkix7UNUYwIqoaBnmZjBxjNptdJ0mif3W5oEfpq2P2er0vGhDpD2q0q+oG3RT9AAAAAElFTkSuQmCC);
       }
       .example {
@@ -1110,6 +205,32 @@ export default {
           left: 50%;
         }
       }
+      .seats-main {
+        width: 100%;
+        height: 100%;
+
+        table {
+          width: 100%;
+          // height: 100%;
+          tr {
+            .false {
+              background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAaCAYAAACgoey0AAAAAXNSR0IArs4c6QAAAY9JREFUSA3tVs1qg0AQ3l1/i5eCFC8+QSC0+BQ999QeC32t9lLovac8RQwk6BOUXLzVitFE0/mEDVIiJsbkUgeM7jjzfd/OjpvlrGZhGL6uVqvnsix5zX3yoxBia5rm22g0etkL5vt+WRTFtm8DJrDrpKI+wExJXd3VyzMw/1axf5YDpe6IqRSPUJZlGdQdmN4eBixgAps4nmRGRUyOCTneXddlnHOWJEkv5CAFFjCBTeOP2Wz2CXI+nU7vqZkmnudVAXBuNptKpWVZGHa2OI4ZdTPTNK3CIB42n89TarYHQWpuHcfJoEqaqqqViFNKDhKUV5ICGxy2bQt6d4cfU1EUQ5LKO4KQ3NWQW5+MxAEXCbraNZd8can7QHypSrOh1EOpz1YBtQkZOw+2zK67V1teI7FhGGy9XjfpavWDWNf1xrhGYtpTGa5z2f/6jmkZFPwff0VR1H0xj1yL5XKJhv3hQRDoaZriILClKz8S5+hwIk3ptHNTHTtowBeLxXWe5/2d8vZIoi4X4/H4myZY/AJMWAAq2pF/7QAAAABJRU5ErkJggg==);
+            }
+            .true {
+              background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAaCAYAAACgoey0AAAAAXNSR0IArs4c6QAAAeRJREFUSA3tlr9Lw0AUx99dmyZtpRbBX6AOoiAG1KF1EXFUcBMEHRX/LV0EFyfBUhwFJwWdXC2CIKKIttU0TXLPd6kJaaFQz3bSB0kud+99P3ePl7swiNjZ4uz+h+PueAgs0v3rZowBpjXtYPXydi8QiwcN+ZTQlbEBFmNd5YKHyM4fXncJEYJ5FCxX2m2o1JearVlsAkcn0et2CD7NmVt6nMPdu0Up97rGrdY9X1NqFxbN7UDYBxfzs0XO4HCqPwVxzuH6uQIVxw18lJ9VWsDNSwU0EpfaQoijYt48kYKskDfXBIri0mgWaNy3Z8uBUtmC3FAm7GuMdH5HBLh4fIPpbBJGUrofKKjv6qlsuQgbHBnMj/cZdgCVHoNJzS8IyxWdk1o8bSFAi/EQKoclYzitySwvcCbQoKJrTCkSnCAvh4JVzaXlGdHVfAtxYDoCJsPiUgWoxv2DVTP347j/VP84ZaoBfy/VTT8C0bQ5KKDmefBiqe1etB+D3JvbWVvwZCYFj582xan9jSCdEhMZox0X2oKzehzk1Sv7Y8WFLMaR48PTZ93pVUpbde8rNaBjuMpuN83EXUnYVEJIx2e91bHb7/SNWOn08KBfslSBrLA8l9WNhNq30+Hs7Fqdr4/OlNnxsfcFxEaatII5mN4AAAAASUVORK5CYII=);
+            }
+            .selected {
+              background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAaCAYAAACgoey0AAAAAXNSR0IArs4c6QAAAoxJREFUSA3Fls9LFGEYx78z7rq7WuEiQqEVi1SHwjrVSU9aghURJYa2UUgd+nEuKAg6dK7cQ6FSCYrdosK/oFupFF46CLkFBZm7s+K4P2benmfGHRx3t5nZXdln2Zl5n3me5/O+z/vMMyNhk0RfY0zL4qrQIW1SV3wpyRA+P8ZfRTGcD+bLX/CZoeF9kMiwqiIEpJXvuEZBLbANwSutNpRXIFH+tmbRBq7qMh2CWeDLoxjgnV1bNlLu4Ob+di5txuTYQ+O4lPc0wEOjmNGAicZmUpMmEQfYoVLhGMmflOo6gGPrGiYHx/CW40oE7dUFZpojPDJR6RTNcgVo2mvuj6n1flxeJGALENy54SuAv0tQJR3nZR042hBGOg9lkwAZcpFRlXuSPY1H4JODho+eoxj0zFhQ1tLCgrsgU5Ufk2kQpIkEthJkSg9VomvparuDeye+4vjuqOFDaYVsVZAtTICYoeK3bHbOg66227hw8AmWlE+Y/T3t7EAWrsFXDk+he//dgqCdrbcI+tSAxuZ7sK4lC2yKKVyD6+UGnG1/jL7IIytOZ+tNXDz0jKCfEZs/CTWXsO45Xdha5v+MXy4M4HrHO5yK3Iegn5L5RdARxFOzBO0hKD0GHsQ1OKurePHlDG50vEdv5IGBiKfmMDLX7RnKzq5TzcYMf07whT8fsJj4iFiZUI7lesVszJLV1wh+2hxUcPS04go4Ba41A5dMNXceLUONnVpfWUJdb6P1F3UvCea3ybpS1MedkvpwKFzatCTYHwL4v11Ssz2uFbiOwT8yCjy+ecvfAJU7q8Cq9PAN6r8ljQ8BQbOgOt5eoZpTD7Sjxah4/u4dnETTDj88vPq9T3A1C/mcH0p/P7R/ODnAZaZCuGEAAAAASUVORK5CYII=);
+            }
+            td {
+              height: 34px;
+              font-size: 12px;
+              // background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAaCAYAAACgoey0AAAAAXNSR0IArs4c6QAAAY9JREFUSA3tVs1qg0AQ3l1/i5eCFC8+QSC0+BQ999QeC32t9lLovac8RQwk6BOUXLzVitFE0/mEDVIiJsbkUgeM7jjzfd/OjpvlrGZhGL6uVqvnsix5zX3yoxBia5rm22g0etkL5vt+WRTFtm8DJrDrpKI+wExJXd3VyzMw/1axf5YDpe6IqRSPUJZlGdQdmN4eBixgAps4nmRGRUyOCTneXddlnHOWJEkv5CAFFjCBTeOP2Wz2CXI+nU7vqZkmnudVAXBuNptKpWVZGHa2OI4ZdTPTNK3CIB42n89TarYHQWpuHcfJoEqaqqqViFNKDhKUV5ICGxy2bQt6d4cfU1EUQ5LKO4KQ3NWQW5+MxAEXCbraNZd8can7QHypSrOh1EOpz1YBtQkZOw+2zK67V1teI7FhGGy9XjfpavWDWNf1xrhGYtpTGa5z2f/6jmkZFPwff0VR1H0xj1yL5XKJhv3hQRDoaZriILClKz8S5+hwIk3ptHNTHTtowBeLxXWe5/2d8vZIoi4X4/H4myZY/AJMWAAq2pF/7QAAAABJRU5ErkJggg==);
+              background-repeat: no-repeat;
+            }
+          }
+        }
+      }
       .row-id-container {
         width: 20px;
         float: left;
@@ -1161,6 +282,20 @@ export default {
       flex-direction: column;
       justify-content: space-evenly;
       align-items: flex-start;
+      .ticket {
+        cursor: default;
+        position: relative;
+        font-size: 12px;
+        color: #f03d37;
+        display: inline-block;
+        width: 60px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        margin: 0 12px 10px 0;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAeCAYAAABwmH1PAAAAAXNSR0IArs4c6QAAAXlJREFUWAlj/Oho7cXAzLTg/89fogzDGDCys71m+PsvgeGji+2r38eP/h/u4Pexo/9BfmUCxSyLhdUwjluI11gsrRhAfmUa9j5F8+Coh9ECZNhxR2N42EUpmodGZgx/TYz9+nvzhn9ogTEsuUysDGxS/548jP4+qe/0l6zUL//fvh2WHoV5ihHGALa0GD872rQxamrm8EybzQMTH070RzsLBngeZmRk/M+7/0jVv9s3rw7n5A33MCgmQZ4GRnn7r3Vrvw+nmEX2C4qHQRLMPxlO/X38kA1Z0XBiY3h4OHkOm18wPPyXncGMWVb+FzbFw0EMxcOgkvo/A0MlW1Aw53DwHDY/wD0Mq5aYVNW1WX0D4OLYNA1lMZavtraSoGT8ydWukklTU5u7uWNY1sGwSGL5zfDrGYuM6ldQMh7OMQv3MIjBPX8xN0xguNPDNq/iirhRD+MKmeEiPhrDwyUmcflj5MUwaM7lz/FjuAJk2IiD/AjyK+NIm0wDAACxUs8MaULTAAAAAElFTkSuQmCC)
+          no-repeat;
+      }
     }
   }
 }

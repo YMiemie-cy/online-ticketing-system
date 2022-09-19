@@ -11,11 +11,12 @@
         <div class="bar"></div>
         <span class="step-text">选择座位</span>
       </div>
-      <div class="step">
+      <!-- <div class="step">
         <span class="step-num">3</span>
         <div class="bar"></div>
         <span class="step-text">14分钟内付款</span>
-      </div>
+      </div> -->
+      <slot></slot>
       <div class="step last">
         <span class="step-num">4</span>
         <div class="bar"></div>
@@ -87,9 +88,6 @@ export default {
   .bar {
     width: 0;
     height: 4px;
-    // border-left: 96px solid #ffd8d7;
-    // border-right: 100px solid #ffd8d7;
-
     border-left: 150px solid #ffd8d7;
     border-right: 150px solid #ffd8d7;
   }
