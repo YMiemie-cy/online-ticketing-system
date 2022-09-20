@@ -130,6 +130,7 @@ let routes = [{
   {
     path: '/adminHome',
     component: adminHome,
+    redirect:'adminHome/index',
     meta: {
       title: '管理后台系统'
     },
