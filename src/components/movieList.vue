@@ -2,7 +2,7 @@
   <div id="movieList">
     电影列表
     <el-row>
-      <el-col :span="6" v-for="(o, index) in movieList" :key="index">
+      <el-col :span="6" v-for="(item, index) in movieList" :key="index">
         <el-card shadow="hover" @click.native="$root.$emit('showDetail', $event)">
           <img
             src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
@@ -10,8 +10,8 @@
           />
 
           <div class="bottom">
-            <span>{{ name }}</span>
-            <span>{{ score }}</span>
+            <span>{{ item.name }}</span>
+            <span>{{ item.rating }}</span>
           </div>
           <el-button class="buy">购票</el-button>
         </el-card>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { getMovies } from '../api';
 export default {
   name: 'movieList',
   data() {
@@ -36,6 +37,12 @@ export default {
       score: '9.1',
       movieList: [{ name: '13' }, { name: '13' }, { name: '13' }],
     };
+  },
+  async created() {
+    // 获取电影信息
+    const res = await getMovies();
+    console.log(res.data);
+    this.movieList = res.data;
   },
   methods: {
     handleSizeChange(val) {

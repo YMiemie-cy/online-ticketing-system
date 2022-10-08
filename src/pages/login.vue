@@ -186,15 +186,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 #login {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-}
-#login .left {
+.left {
   display: flex;
   width: 50%;
   height: 100%;
@@ -202,7 +201,7 @@ export default {
   align-items: center;
   flex-direction: column;
 }
-#login .right {
+.right {
   display: flex;
   width: 50%;
   height: 100%;
@@ -210,13 +209,16 @@ export default {
   align-items: center;
   flex-direction: column;
 }
-.el-input >>> .el-input__inner {
+}
+
+
+.el-input /deep/ .el-input__inner {
   border-top: none;
   border-left: none;
   border-right: none;
   border-radius: 0%;
 }
-.el-form-item >>> .el-form-item__label {
+.el-form-item /deep/ .el-form-item__label {
   color: #d1d2d4;
 }
 </style>
