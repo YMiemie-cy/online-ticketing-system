@@ -2,7 +2,7 @@
   <div id="ranking">
     排行榜
     <ul>
-      <li v-for="(item, i) in 10">
+      <li v-for="(item, i) in list">
         <el-card shadow="hover">
           <div class="left">
             <svg
@@ -50,11 +50,11 @@
 
           <div class="right">
             <div>
-              <p>{{ name }}</p>
-              <p>{{ starring }}</p>
-              <p>{{ date }}</p>
+              <p>{{ item.name }}</p>
+              <p>{{ item.actors }}</p>
+              <p>{{ item.date }}</p>
             </div>
-            <div>{{ score }}</div>
+            <div>{{ item.rating }}</div>
           </div>
         </el-card>
       </li>
@@ -63,15 +63,17 @@
 </template>
 
 <script>
+import { getMovies } from '../api';
 export default {
   name: 'ranking',
   data() {
     return {
-      name: '片名',
-      starring: '主演',
-      date: '上映时间',
-      score: '评分',
+      list: [{ name: '片名', actors: '主演', date: '上映时间', rating: '评分' }],
     };
+  },
+  async created() {
+    const res = await getMovies();
+    this.list = res.data;
   },
 };
 </script>
