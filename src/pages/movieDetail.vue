@@ -8,10 +8,14 @@
           </div>
           <div class="right">
             <div class="top">
-              <p>{{ name }}</p>
-              <p>{{ Classification }}</p>
-              <p>{{ time }}</p>
-              <p>{{ date }}</p>
+              <p>{{ currentList.name }}</p>
+              <p>
+                {{
+                  `${currentList.classify.type}  ${currentList.classify.period} ${currentList.classify.region}`
+                }}
+              </p>
+              <p>{{ currentList.time }}</p>
+              <p>{{ currentList.date }}</p>
             </div>
             <div class="bottom">
               <div class="btn">
@@ -43,31 +47,52 @@
 
       <el-main class="bot-main">
         <div v-show="active === '1'">
-          <div>
+          <div class="plot">
             <div>
               <h2>剧情介绍</h2>
             </div>
             <p>
-              商周之战一千五百年后，天界衰落，蒙冤落魄的杨戬以赏银捕手为业谋生。一日，杨戬接受了一位神秘访客的赏银去追捕一位少年，意外发现少年竟是自己的亲外甥沉香。沉香立志要寻回宝莲灯，劈山救母，却将酿成大祸。杨戬踏上追寻沉香并揭开尘封往事的旅程……
+              {{ currentList.description.text }}
             </p>
           </div>
-          <div>
+          <div class="actor">
             <div>
               <h2>演职人员</h2>
               <div><el-link type="info" @click="active = '2'">更多></el-link></div>
             </div>
-            <div>xxxxxxxxxxxxxxxxxxxxx</div>
+            <div>{{ currentList.description.actors }}</div>
           </div>
-          <div>
+          <div class="images">
             <div>
               <h2>图集</h2>
               <div><el-link type="info" @click="active = '3'">更多></el-link></div>
             </div>
-            <div>xxxxxxxxxxxxxxxxxxxxx</div>
+            <div class="content">
+              <div v-for="(item, index) in currentList.description.image.actor">
+                <img
+                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  alt=""
+                />
+              </div>
+            </div>
           </div>
         </div>
-        <div v-show="active === '2'">2222222222</div>
-        <div v-show="active === '3'">3333333333</div>
+        <div v-show="active === '2'" class="cast">
+          <div v-for="(item, index) in currentList.description.image.gallery">
+            <img
+              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+              alt=""
+            />
+          </div>
+        </div>
+        <div v-show="active === '3'" class="atlas">
+          <div v-for="(item, index) in currentList.description.image.gallery">
+            <img
+              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+              alt=""
+            />
+          </div>
+        </div>
       </el-main>
     </div>
   </div>
@@ -80,15 +105,21 @@ export default {
   data() {
     return {
       active: '1',
-      name: '新神榜：杨戬',
-      Classification: '动画 冒险 动作',
-      time: '中国大陆/127分钟',
-      date: '2022-08-19 09:00中国大陆上映',
+      currentList: {},
     };
+  },
+  created() {
+    // console.log(this.$route.params.id);
+    this.currentList = this.$root.movieList.filter(item => {
+      if (item.id == this.$route.params.id) {
+        return item;
+      }
+    })[0];
+    console.log('detail', this.currentList, this.$route.params.id, this.$root.movieList);
   },
   methods: {
     buy() {
-      this.$router.push('/home/seatSelection/1');
+      this.$router.push(`/home/seatSelection/${this.$route.params.id}`);
     },
     handleSelect(key, keyPath) {
       this.active = key;
@@ -105,6 +136,22 @@ export default {
     height: 50px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+  }
+  .images {
+    .content {
+      justify-content: flex-start;
+      height: auto;
+    }
+  }
+  .cast {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .atlas {
+    display: flex;
+    justify-content: flex-start;
     align-items: center;
   }
 }

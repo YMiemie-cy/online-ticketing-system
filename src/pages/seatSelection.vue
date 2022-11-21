@@ -7,10 +7,14 @@
         </div>
         <div class="right">
           <div class="top">
-            <p>{{ name }}</p>
-            <p>{{ Classification }}</p>
-            <p>{{ time }}</p>
-            <p>{{ date }}</p>
+            <p>{{ currentList.name }}</p>
+            <p>
+              {{
+                `${currentList.classify.type}  ${currentList.classify.period} ${currentList.classify.region}`
+              }}
+            </p>
+            <p>{{ currentList.time }}</p>
+            <p>{{ currentList.date }}</p>
           </div>
           <div class="bottom">
             <div class="btn">
@@ -22,14 +26,18 @@
       </div>
     </BigPicture>
 
-    <ClassificationBar :list="seatList" />
+    <ClassificationBar
+      :list="seatList"
+      :localClassify="localClassify"
+      @getLocalClassify="getLocalClassify"
+    />
 
     <div id="cinemaList">
       <h4 class="top">影院列表</h4>
       <div class="main">
         <div v-for="(item, i) in cinemaList">
           <div class="left">
-            <p>{{ item.name }}</p>
+            <p>{{ item.brand }}</p>
             <p>{{ item.address }}</p>
           </div>
           <div class="right">
@@ -45,19 +53,45 @@
 <script>
 import BigPicture from '@/components/bigPicture.vue';
 import ClassificationBar from '@/components/classificationBar.vue';
+
+const getCinemaList = that => {
+  console.log('searCurrent', that.currentList);
+  that.cinemaList = that.currentList.location.classify.map(item => {
+    if (
+      that.localClassify.date === '全部' &&
+      that.localClassify.brand === '全部' &&
+      that.localClassify.district === '全部' &&
+      that.localClassify.cinemaType === '全部' &&
+      that.localClassify.service === '全部'
+    ) {
+      return item;
+    } else {
+      if (
+        item.date === that.localClassify.date &&
+        item.brand === that.localClassify.brand &&
+        item.district === that.localClassify.district &&
+        item.cinemaType === that.localClassify.cinemaType &&
+        item.service === that.localClassify.service
+      ) {
+        return item;
+      } else {
+        return {};
+      }
+    }
+  });
+
+  // console.log(that.cinemaList);
+};
+
 export default {
   name: 'seatSelection',
   data() {
     return {
-      name: '新神榜：杨戬',
-      Classification: '动画 冒险 动作',
-      time: '中国大陆/127分钟',
-      date: '2022-08-19 09:00中国大陆上映',
       seatList: [
         {
           title: '日期',
-          default: '明天9月16',
-          children: ['明天9月16', '周六9月17', '周日9月18'],
+          default: '全部',
+          children: ['全部', '明天9月16', '周六9月17', '周日9月18'],
         },
         {
           title: '品牌',
@@ -182,43 +216,73 @@ export default {
       ],
       cinemaList: [
         {
-          name: '365影院（甜筒xxxxx）',
+          name: '365影院',
           address: '地址：xxxxxxxxxxxxxxxxxxxxx',
           price: '50',
         },
         {
-          name: '365影院（甜筒xxxxx）',
+          name: '365影院',
           address: '地址：xxxxxxxxxxxxxxxxxxxxx',
           price: '50',
         },
         {
-          name: '365影院（甜筒xxxxx）',
+          name: '365影院',
           address: '地址：xxxxxxxxxxxxxxxxxxxxx',
           price: '50',
         },
         {
-          name: '365影院（甜筒xxxxx）',
+          name: '365影院',
           address: '地址：xxxxxxxxxxxxxxxxxxxxx',
           price: '50',
         },
         {
-          name: '365影院（甜筒xxxxx）',
+          name: '365影院',
           address: '地址：xxxxxxxxxxxxxxxxxxxxx',
           price: '50',
         },
       ],
+      currentList: {},
+      localClassify: {
+        id: '',
+        date: '全部',
+        brand: '全部',
+        district: '全部',
+        cinemaType: '全部',
+        service: '全部',
+      },
     };
   },
   components: { BigPicture, ClassificationBar },
+  created() {
+    this.currentList = this.$root.movieList.filter(item => {
+      if (item.id == this.$route.params.id) {
+        return item;
+      }
+    })[0];
+    this.localClassify.id = this.$route.params.id;
+  },
+  watch: {
+    localClassify: {
+      handler(newValue, oldValue) {
+        getCinemaList(this);
+        // console.log(this.cinemaList, 'seatWatch');
+      },
+      deep: true, //深度检测  针对符合类型
+      // immediate: true, //首次运行
+    },
+  },
   methods: {
     buy() {
       this.buyTickets = true;
     },
     viewDetails() {
-      this.$router.push('/home/detail/1');
+      this.$router.push(`/home/detail/${this.$route.params.id}`);
     },
     selectVenue() {
-      this.$router.push('/home/selectVenue/1');
+      this.$router.push(`/home/selectVenue/${this.$route.params.id}`);
+    },
+    getLocalClassify(data) {
+      this.localClassify = Object.assign(data, this.localClassify);
     },
   },
 };

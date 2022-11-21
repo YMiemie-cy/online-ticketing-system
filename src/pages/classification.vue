@@ -1,7 +1,7 @@
 <template>
   <div id="classification">
-    <ClassificationBar :list="classList" />
-    <MovieList />
+    <ClassificationBar :list="classList" :classify="classify" @getClassify="getClassify" />
+    <MovieList :classify="classify" />
   </div>
 </template>
 
@@ -13,6 +13,11 @@ export default {
   name: 'classification',
   data() {
     return {
+      classify: {
+        type: '全部',
+        region: '全部',
+        period: '全部',
+      },
       classList: [
         {
           title: '类型',
@@ -108,6 +113,12 @@ export default {
   components: {
     ClassificationBar,
     MovieList,
+  },
+  watch: {},
+  methods: {
+    getClassify(data) {
+      this.classify = Object.assign(data, this.classify);
+    },
   },
 };
 </script>

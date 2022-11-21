@@ -5,14 +5,21 @@
 </template>
 
 <script>
+import { getMovies } from './api';
+
 export default {
   name: 'App',
   components: {},
-  created() {
-    this.$root.$on('showDetail', $event => {
-      console.log('hello', $event);
-      this.$router.push('/home/detail/1');
+  async created() {
+    this.$root.$on('showDetail', id => {
+      console.log('helloAPP', id);
+      this.$router.push(`/home/detail/${id}`);
     });
+
+    // 获取电影信息
+    const res = await getMovies();
+    console.log('APP', res.data);
+    this.$root.movieList = res.data;
   },
 };
 </script>

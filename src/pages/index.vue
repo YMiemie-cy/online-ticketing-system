@@ -1,6 +1,6 @@
 <template>
   <div id="index">
-    <MovieList />
+    <MovieList :classify="classify" />
     <Ranking />
   </div>
 </template>
@@ -12,12 +12,19 @@ import Ranking from '../components/ranking.vue';
 export default {
   name: 'index',
   data() {
-    return {};
+    return {
+      classify: {
+        type: '全部',
+        region: '全部',
+        period: '全部',
+      },
+    };
   },
   components: {
     MovieList,
     Ranking,
   },
+  created() {},
 };
 </script>
 

@@ -2,8 +2,8 @@
   <div id="movieList">
     电影列表
     <el-row>
-      <el-col :span="6" v-for="(item, index) in movieList" :key="index">
-        <el-card shadow="hover" @click.native="$root.$emit('showDetail', $event)">
+      <el-col :span="6" v-for="(item, index) in currentList" :key="index">
+        <el-card shadow="hover" @click.native="$root.$emit('showDetail', item.id)">
           <img
             src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
             class="image"
@@ -29,27 +29,81 @@
 
 <script>
 import { getMovies } from '../api';
+
+const getClassify = that => {
+  that.movieList = that.$root.movieList.map(item => {
+    if (
+      that.classify.type === '全部' &&
+      that.classify.region === '全部' &&
+      that.classify.period === '全部'
+    ) {
+      return item;
+    } else {
+      if (
+        item.classify.type === that.classify.type &&
+        item.classify.region === that.classify.region &&
+        item.classify.period === that.classify.period
+      ) {
+        return item;
+      } else {
+        return {};
+      }
+    }
+  });
+  that.currentList = that.movieList;
+  console.log(that.movieList);
+};
+
 export default {
   name: 'movieList',
   data() {
     return {
       name: '默认',
       score: '9.1',
-      movieList: [{ name: '13' }, { name: '13' }, { name: '13' }],
+      movieList: [],
+      currentList: [],
     };
   },
+  props: {
+    classify: {
+      type: Object,
+    },
+  },
   async created() {
-    // 获取电影信息
+    // console.log('created', this.classify);
     const res = await getMovies();
-    console.log(res.data);
-    this.movieList = res.data;
+    // console.log('APP2', res.data);
+    this.$root.movieList = res.data;
+    getClassify(this);
+    this.currentList = this.movieList.filter((item, index) => {
+      if (index >= 0 && index <= 9) {
+        return item;
+      }
+    });
+  },
+  watch: {
+    classify: {
+      handler(newValue, oldValue) {
+        getClassify(this);
+        // console.log('watch', this.classify);
+        console.log('watch', this.currentList);
+      },
+      deep: true, //深度检测  针对符合类型
+      immediate: true, //首次运行
+    },
   },
   methods: {
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
-    handleCurrentChange(val) {
+    handleCurrentChange(val = 1) {
       console.log(`当前页: ${val}`);
+      const resList = this.movieList.filter((item, index) => {
+        if (index >= val - 1 && index <= val + 9) {
+          return item;
+        }
+      });
+      this.currentList = resList;
     },
   },
 };

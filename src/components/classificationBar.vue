@@ -3,7 +3,7 @@
     <el-radio-group v-for="(item, i) in list" v-model="item.default" class="group">
       <div class="title">{{ item.title }}:</div>
       <div class="right">
-        <div v-for="(item2, j) in item.children">
+        <div v-for="(item2, j) in item.children" @click="show">
           <el-radio-button :label="item2" class="button"></el-radio-button>
         </div>
       </div>
@@ -19,7 +19,52 @@ export default {
   data() {
     return {};
   },
-  props: ['list'],
+  props: {
+    list: {
+      type: Array,
+    },
+    classify: {
+      type: Object,
+    },
+    localClassify: {
+      type: Object,
+    },
+  },
+  methods: {
+    show(e) {
+      // console.log(e.target.parentElement.className.indexOf('is-active'));
+      // previousSibling 表示上一个兄弟节点
+      const typeName = e.target.parentElement.parentElement.parentElement.previousSibling.innerText;
+      const option = e.target.innerText;
+
+      if (this.classify && option !== '') {
+        console.log('Bar', this.classify, typeName, option);
+        if (typeName === '类型:') {
+          this.$set(this.classify, 'type', option);
+        } else if (typeName === '区域:') {
+          this.$set(this.classify, 'region', option);
+        } else if (typeName === '年代:') {
+          this.$set(this.classify, 'period', option);
+        }
+        this.$emit('getClassify', this.classify);
+      }
+      if (this.localClassify && option !== '') {
+        console.log('Bar', this.localClassify, typeName, option);
+        if (typeName === '日期:') {
+          this.$set(this.localClassify, 'date', option);
+        } else if (typeName === '品牌:') {
+          this.$set(this.localClassify, 'brand', option);
+        } else if (typeName === '行政区:') {
+          this.$set(this.localClassify, 'district', option);
+        } else if (typeName === '影厅类型:') {
+          this.$set(this.localClassify, 'cinemaType', option);
+        } else if (typeName === '影院服务:') {
+          this.$set(this.localClassify, 'service', option);
+        }
+        this.$emit('getLocalClassify', this.localClassify);
+      }
+    },
+  },
 };
 </script>
 
@@ -51,6 +96,10 @@ export default {
   }
   .right {
     flex: 1;
+    // > div {
+    //   width: 64px;
+    //   height: 36px;
+    // }
   }
 }
 

@@ -17,6 +17,9 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false
 
 new Vue({
+  data:{
+    movieList: []
+  },
   render: h => h(App),
   router,
   axios,
