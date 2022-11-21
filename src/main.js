@@ -26,6 +26,14 @@ new Vue({
   methods: {
     showDetail() {
       console.log('hello');
+    },
+    getCurrentIdList(id){
+      return this.movieList.filter(item => {
+      if (item.id == id) {
+        return item;
+      }
+    })[0];
+      
     }
   }
 }).$mount('#app')

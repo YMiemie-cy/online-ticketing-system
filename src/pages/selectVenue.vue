@@ -7,10 +7,14 @@
         </div>
         <div class="right">
           <div class="top">
-            <p>{{ name }}</p>
-            <p>{{ Classification }}</p>
-            <p>{{ time }}</p>
-            <p>{{ date }}</p>
+            <p>{{ currentList.name }}</p>
+            <!-- <p>
+              {{
+                `${currentList.classify.type} ${currentList.classify.region} ${currentList.classify.period}`
+              }}
+            </p>
+            <p>{{ currentList.duration }}</p> -->
+            <p>{{ currentList.date }}</p>
           </div>
           <div class="bottom">
             <div class="btn">
@@ -25,13 +29,13 @@
     <div class="main">
       <div class="top">
         <div class="title">
-          <h2>{{ contentList.name }}</h2>
-          <div class="score">{{ contentList.rating }}</div>
+          <h2>{{ currentList.name }}</h2>
+          <div class="score">{{ currentList.rating }}</div>
         </div>
         <div class="content">
-          <div>时长:{{ contentList.duration }}</div>
-          <div>类型:{{ contentList.type }}</div>
-          <div>主演:{{ contentList.starring }}</div>
+          <div>时长:{{ currentList.duration }}</div>
+          <div>类型:{{ currentList.classify.type }}</div>
+          <div>主演:{{ currentList.description.actors }}</div>
         </div>
       </div>
       <div class="bottom">
@@ -63,37 +67,44 @@ export default {
   name: 'selectVenue',
   data() {
     return {
-      name: '新神榜：杨戬',
-      Classification: '动画 冒险 动作',
-      time: '中国大陆/127分钟',
-      date: '2022-08-19 09:00中国大陆上映',
+      // name: '新神榜：杨戬',
+      // Classification: '动画 冒险 动作',
+      // time: '中国大陆/127分钟',
+      // date: '2022-08-19 09:00中国大陆上映',
       index: 0,
-      contentList: {
-        name: '新神榜：杨戬',
-        rating: '8.8分',
-        duration: '127分钟',
-        type: '动画',
-        starring: 'xxxx',
-      },
+      currentList: {},
       tableData: [
-        {
-          date: '今天9月16',
-          children: [{ time: '16:15', language: '中文2D', room: 'xxxx', price: '￥43' }],
-        },
-        {
-          date: '今天9月17',
-          children: [{ time: '17:15', language: '中文3D', room: 'xxxx', price: '￥23' }],
-        },
-        {
-          date: '今天9月18',
-          children: [{ time: '18:15', language: '中文2D', room: 'xxxx', price: '￥13' }],
-        },
+        // {
+        //   date: '今天9月16',
+        //   children: [{ time: '16:15', language: '中文2D', room: 'xxxx', price: '￥43' }],
+        // },
+        // {
+        //   date: '今天9月17',
+        //   children: [{ time: '17:15', language: '中文3D', room: 'xxxx', price: '￥23' }],
+        // },
+        // {
+        //   date: '今天9月18',
+        //   children: [{ time: '18:15', language: '中文2D', room: 'xxxx', price: '￥13' }],
+        // },
       ],
     };
   },
   components: { BigPicture },
   created() {
-    console.log(this.tableData[0].children[0]);
+    this.currentList = this.$root.getCurrentIdList(this.$route.params.id);
+    this.currentList.location.classify.filter(item => {
+      if (item.brand === this.$route.params.brand) {
+        let obj = {
+          date: item.date,
+          children: [
+            { time: item.time, language: item.language, room: item.room, price: item.price },
+          ],
+        };
+        console.log(obj);
+        this.tableData.push(obj);
+      }
+    });
+    console.log('tableDate', this.tableData);
   },
   methods: {
     btn(e) {
@@ -101,7 +112,7 @@ export default {
       this.index = parseInt(e.target.getAttribute('data-key'));
     },
     goPayment() {
-      this.$router.push('/home/payment/1/step2');
+      this.$router.push(`/home/payment/${this.$route.params.id}/step2`);
     },
   },
 };

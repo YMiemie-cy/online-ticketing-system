@@ -95,8 +95,10 @@
 import ProgressBar from '../components/progressBar.vue';
 export default {
   name: 'step2',
+
   data() {
     return {
+      currentList: {},
       seatList: [
         ['false', 'false', 'false', 'false', 'false', 'false'],
         ['false', 'false', 'false', 'false', 'false', 'false'],
@@ -107,9 +109,12 @@ export default {
     };
   },
   created() {
-    // for (let item of this.seatList) {
-    //   console.log(item);
-    // }
+    // this.currentList = this.$root.movieList.filter(item => {
+    //   if (item.id == this.$route.params.id) {
+    //     return item;
+    //   }
+    // })[0];
+    this.currentList = this.$root.getCurrentIdList(this.$route.params.id);
   },
   components: { ProgressBar },
   methods: {

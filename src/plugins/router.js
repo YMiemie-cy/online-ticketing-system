@@ -89,7 +89,7 @@ let routes = [{
 
       },
       {
-        path: 'selectVenue/:id',
+        path: 'selectVenue/:id/:brand',
         component: SelectVenue,
         meta: {
           title: '选座'

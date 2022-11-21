@@ -42,7 +42,7 @@
           </div>
           <div class="right">
             <div>{{ item.price }}</div>
-            <el-button @click="selectVenue">选座购票</el-button>
+            <el-button @click="selectVenue(i)">选座购票</el-button>
           </div>
         </div>
       </div>
@@ -254,18 +254,14 @@ export default {
   },
   components: { BigPicture, ClassificationBar },
   created() {
-    this.currentList = this.$root.movieList.filter(item => {
-      if (item.id == this.$route.params.id) {
-        return item;
-      }
-    })[0];
+    this.currentList = this.$root.getCurrentIdList(this.$route.params.id);
     this.localClassify.id = this.$route.params.id;
   },
   watch: {
     localClassify: {
       handler(newValue, oldValue) {
         getCinemaList(this);
-        // console.log(this.cinemaList, 'seatWatch');
+        console.log(this.cinemaList, 'seatWatch');
       },
       deep: true, //深度检测  针对符合类型
       // immediate: true, //首次运行
@@ -278,8 +274,8 @@ export default {
     viewDetails() {
       this.$router.push(`/home/detail/${this.$route.params.id}`);
     },
-    selectVenue() {
-      this.$router.push(`/home/selectVenue/${this.$route.params.id}`);
+    selectVenue(i) {
+      this.$router.push(`/home/selectVenue/${this.$route.params.id}/${this.cinemaList[i].brand}`);
     },
     getLocalClassify(data) {
       this.localClassify = Object.assign(data, this.localClassify);

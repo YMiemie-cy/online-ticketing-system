@@ -110,11 +110,7 @@ export default {
   },
   created() {
     // console.log(this.$route.params.id);
-    this.currentList = this.$root.movieList.filter(item => {
-      if (item.id == this.$route.params.id) {
-        return item;
-      }
-    })[0];
+    this.currentList = this.$root.getCurrentIdList(this.$route.params.id);
     console.log('detail', this.currentList, this.$route.params.id, this.$root.movieList);
   },
   methods: {
