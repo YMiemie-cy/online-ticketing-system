@@ -12,8 +12,8 @@
                 src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
               ></el-avatar>
             </template>
-            <el-menu-item index="user">个人中心</el-menu-item>
-            <el-menu-item>退出</el-menu-item>
+            <el-menu-item @click="$router.push('/home/user/orderDetails')">个人中心</el-menu-item>
+            <el-menu-item @click="exit">退出</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-header>
@@ -44,6 +44,11 @@ export default {
       },
       immediate: true,
       // deep: true
+    },
+  },
+  methods: {
+    exit() {
+      this.$router.push('/login');
     },
   },
 };

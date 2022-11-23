@@ -96,7 +96,7 @@ let routes = [{
         }
       },
       {
-        path: 'payment/:id',
+        path: 'payment/:id/:index',
         component: Payment,
         meta: {
           title: '支付'

@@ -56,7 +56,7 @@ import ClassificationBar from '@/components/classificationBar.vue';
 
 const getCinemaList = that => {
   console.log('searCurrent', that.currentList);
-  that.cinemaList = that.currentList.location.classify.map(item => {
+  that.cinemaList = that.currentList.location.map(item => {
     if (
       that.localClassify.date === '全部' &&
       that.localClassify.brand === '全部' &&

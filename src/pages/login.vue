@@ -103,10 +103,6 @@ export default {
         username: '',
         password: '',
       },
-      regList: {
-        username: '',
-        password: '',
-      },
       ruleForm: {
         pass: '',
         code: '',
@@ -131,16 +127,18 @@ export default {
         username: this.loginList.username,
         password: this.loginList.password,
       });
-      console.log(res);
+      if(res.data.code === 200){
+        this.$router.push('/home/index')
+      }
     },
-    async reg(formName) {
+     reg(formName) {
       this.$refs[formName].validate(async valid => {
         if (valid) {
           const res = await postReg({
-            username: this.regList.username,
-            password: this.regList.password,
+            username: this.ruleForm.email,
+            password: this.ruleForm.pass,
           });
-          console.log(res);
+          console.log('reg',res);
           alert('submit!');
         } else {
           console.log('error submit!!');

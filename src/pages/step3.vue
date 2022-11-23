@@ -17,7 +17,7 @@
           <span class="second">{{ second }}</span>
           秒内完成支付
         </p>
-        <p class="tip">超时订单会自动取消，如遇支付问题，请致电猫眼客服：1010-5335</p>
+        <p class="tip">超时订单会自动取消，如遇支付问题，请致电客服：1010-5335</p>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
     <div class="foot">
       <div>
         实际支付:
-        <span>￥{{ price }}</span>
+        <span>￥{{ totalPrice }}</span>
       </div>
       <el-button round @click="buy">确定支付</el-button>
     </div>
@@ -81,17 +81,14 @@ export default {
   name: 'step3',
   data() {
     return {
+      currentList: {},
       tableData: [
         {
-          title: '《新神榜：杨戬》',
-          time: '今天9月20日 14:10',
-          address: 'CGV影城',
-          seat: '4排9座',
+   
         },
       ],
       min: 13,
       second: 59,
-      price: '45',
       flag: false,
       buyList: [
         {
@@ -104,6 +101,10 @@ export default {
   },
   components: {
     ProgressBar,
+  },
+  created() {
+    this.currentList = this.$root.getCurrentIdList(this.$route.params.id, this.$route.params.index);
+    this.tableData = this.$root.buyTicket;
   },
   mounted() {
     let timer = setInterval(() => {
@@ -118,6 +119,15 @@ export default {
         this.flag = true;
       }
     }, 1000);
+  },
+  computed: {
+    totalPrice() {
+      let sum = 0;
+      this.$root.buyTicket.map(item => {
+        sum += item.price;
+      });
+      return sum;
+    },
   },
   methods: {
     back() {

@@ -52,7 +52,7 @@
             <el-table-column prop="room" label="放映厅"></el-table-column>
             <el-table-column prop="price" label="售价（元）"></el-table-column>
             <el-table-column label="选座购票">
-              <el-button @click="goPayment">选座购票</el-button>
+              <el-button @click="goPayment(index)">选座购票</el-button>
             </el-table-column>
           </el-table>
         </div>
@@ -92,7 +92,7 @@ export default {
   components: { BigPicture },
   created() {
     this.currentList = this.$root.getCurrentIdList(this.$route.params.id);
-    this.currentList.location.classify.filter(item => {
+    this.currentList.location.filter(item => {
       if (item.brand === this.$route.params.brand) {
         let obj = {
           date: item.date,
@@ -111,8 +111,9 @@ export default {
       // console.log(e.target.getAttribute('data-key'));
       this.index = parseInt(e.target.getAttribute('data-key'));
     },
-    goPayment() {
-      this.$router.push(`/home/payment/${this.$route.params.id}/step2`);
+    goPayment(index) {
+      console.log(index);
+      this.$router.push(`/home/payment/${this.$route.params.id}/${index}/step2`);
     },
   },
 };

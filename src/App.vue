@@ -16,10 +16,12 @@ export default {
       this.$router.push(`/home/detail/${id}`);
     });
 
-    // 获取电影信息
-    const res = await getMovies();
-    console.log('APP', res.data);
-    this.$root.movieList = res.data;
+    if (this.$route.path === '/home/index') {
+      // 获取电影信息
+      const res = await getMovies();
+      console.log('APP', res.data);
+      this.$root.movieList = res.data;
+    }
   },
 };
 </script>

@@ -62,17 +62,17 @@
         <div class="top">
           <img src="../assets/image.jpg" />
           <div>
-            <p>name</p>
-            <p>类型:</p>
-            <p>时长:</p>
+            <p>{{ currentList.name }}</p>
+            <p>类型:{{ currentList.classify.type }}</p>
+            <p>时长:{{ currentList.duration }}</p>
           </div>
         </div>
         <div class="bottom">
-          <p>影院 :</p>
-          <p>影厅 :</p>
-          <p>版本 :</p>
-          <p>场次 :</p>
-          <p>票价 :</p>
+          <p>影院 :{{ currentList.location[0].brand }}</p>
+          <p>影厅 :{{ currentList.location[0].room }}</p>
+          <!-- <p>版本 :{{ currentList.location[0]. }}</p> -->
+          <p>场次 :{{ currentList.location[0].date }}</p>
+          <p>票价 :{{ currentList.location[0].price }}</p>
           <div>
             座位 :
             <template v-for="(itemIndex, index) of seatList">
@@ -83,7 +83,7 @@
               </template>
             </template>
           </div>
-          <p>总价 : ￥</p>
+          <p>总价 :{{ totalPrice }} ￥</p>
         </div>
         <el-button @click="goStep3">确认选座</el-button>
       </div>
@@ -109,14 +109,25 @@ export default {
     };
   },
   created() {
-    // this.currentList = this.$root.movieList.filter(item => {
-    //   if (item.id == this.$route.params.id) {
-    //     return item;
-    //   }
-    // })[0];
-    this.currentList = this.$root.getCurrentIdList(this.$route.params.id);
+    this.currentList = this.$root.getCurrentIdList(this.$route.params.id, this.$route.params.index);
+    this.$root.buyTicket = [];
+    // console.log('setp2', this.currentList);
+    // this.seatList = this.currentList.location[0].seats;
   },
   components: { ProgressBar },
+  computed: {
+    totalPrice() {
+      let sum = 0;
+      this.seatList.map(item => {
+        item.map(item2 => {
+          if (item2 === 'selected') {
+            sum += this.currentList.location[0].price;
+          }
+        });
+      });
+      return sum;
+    },
+  },
   methods: {
     seatClick(e, tr, td) {
       if (e.target.classList[0] === 'false') {
@@ -130,7 +141,22 @@ export default {
       }
     },
     goStep3() {
-      this.$router.push('/home/payment/1/step3');
+      this.seatList.map((item, i) => {
+        item.map((item2, j) => {
+          if (item2 === 'selected') {
+            let obj = {
+              title: this.currentList.name,
+              time: this.currentList.location[0].date,
+              address: this.currentList.location[0].brand,
+              seat: `${i + 1}排${j + 1}座`,
+              price: this.currentList.location[0].price,
+            };
+
+            this.$root.buyTicket.push(obj);
+          }
+        });
+      });
+      this.$router.push(`/home/payment/${this.$route.params.id}/${this.$route.params.index}/step3`);
     },
   },
 };

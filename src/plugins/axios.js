@@ -1,8 +1,7 @@
 import axios from "axios";
 import router from "./router.js";
-import {
-  Toast
-} from "vant";
+
+import { Toast } from "vant";
 import Vue from "vue";
 
 //设定基础请求地址
@@ -25,13 +24,22 @@ axios.interceptors.request.use(
     // user = user ? JSON.parse(user) : {};
     // config.headers = { token: user.token };
     // config.headers = { token: "1234567890123456" };
-    let user = window.localStorage.getItem('user');
+    let user = window.localStorage.getItem("user");
     user = user ? JSON.parse(user) : {};
-    // console.log('我是user',user)    
+    // console.log('我是user',user)
     // console.log({ token: user.token })
-    config.headers = {
-      token: user.token
+    // config.headers = {
+    //   token: user.token,
+    // };
+    let headers = {
+      "Accept-Language": "en-CN;q=1.0",
+      "source_type": "apple-appstore",
+      "version_code": "5.4.8",
+      "Content-Type": "application/json",
+      "push_device_type": "4",
+      "Accept": "*/*",
     };
+    config.headers = { ...headers, ...config.headers }; //如果不这样写,那么在接口中设置的header都会被覆盖
 
     return config; // 撒手放出经过配置的请求
   },

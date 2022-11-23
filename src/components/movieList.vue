@@ -3,7 +3,7 @@
     电影列表
     <el-row>
       <el-col :span="6" v-for="(item, index) in currentList" :key="index">
-        <el-card shadow="hover" @click.native="$root.$emit('showDetail', item.id)">
+        <el-card shadow="hover" @click.native="$root.$emit('showDetail', item.id)" v-if="item.id">
           <img
             src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
             class="image"
@@ -58,8 +58,6 @@ export default {
   name: 'movieList',
   data() {
     return {
-      name: '默认',
-      score: '9.1',
       movieList: [],
       currentList: [],
     };

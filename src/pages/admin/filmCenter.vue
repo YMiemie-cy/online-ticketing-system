@@ -6,8 +6,13 @@
 export default {
   name: 'filmCenter',
   data() {
-    return {};
+    return {
+      currentList:[]
+    };
   },
+  created(){
+    
+  }
 };
 </script>
 
