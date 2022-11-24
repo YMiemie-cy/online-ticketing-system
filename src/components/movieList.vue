@@ -3,11 +3,12 @@
     电影列表
     <el-row>
       <el-col :span="6" v-for="(item, index) in currentList" :key="index">
-        <el-card shadow="hover" @click.native="$root.$emit('showDetail', item.id)" v-if="item.id">
-          <img
-            src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-            class="image"
-          />
+        <el-card
+          shadow="hover"
+          @click.native="$root.$emit('showDetail', item.id)"
+          v-if="item.id"
+        >
+          <img :src="item.description.gallery[0]" class="image" />
 
           <div class="bottom">
             <span>{{ item.name }}</span>
@@ -20,7 +21,7 @@
     <el-pagination
       background
       layout="prev, pager, next"
-      :total="1000"
+      :total="currentList.length / 8"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     ></el-pagination>
@@ -28,14 +29,14 @@
 </template>
 
 <script>
-import { getMovies } from '../api';
+import { getMovies } from "../api";
 
-const getClassify = that => {
-  that.movieList = that.$root.movieList.map(item => {
+const getClassify = (that) => {
+  that.movieList = that.$root.movieList.map((item) => {
     if (
-      that.classify.type === '全部' &&
-      that.classify.region === '全部' &&
-      that.classify.period === '全部'
+      that.classify.type === "全部" &&
+      that.classify.region === "全部" &&
+      that.classify.period === "全部"
     ) {
       return item;
     } else {
@@ -55,7 +56,7 @@ const getClassify = that => {
 };
 
 export default {
-  name: 'movieList',
+  name: "movieList",
   data() {
     return {
       movieList: [],
@@ -74,7 +75,7 @@ export default {
     this.$root.movieList = res.data;
     getClassify(this);
     this.currentList = this.movieList.filter((item, index) => {
-      if (index >= 0 && index <= 9) {
+      if (index >= 0 && index <= 7) {
         return item;
       }
     });
@@ -84,7 +85,7 @@ export default {
       handler(newValue, oldValue) {
         getClassify(this);
         // console.log('watch', this.classify);
-        console.log('watch', this.currentList);
+        console.log("watch", this.currentList);
       },
       deep: true, //深度检测  针对符合类型
       immediate: true, //首次运行
@@ -97,7 +98,7 @@ export default {
     handleCurrentChange(val = 1) {
       console.log(`当前页: ${val}`);
       const resList = this.movieList.filter((item, index) => {
-        if (index >= val - 1 && index <= val + 9) {
+        if (index >= val - 1 && index <= val + 7) {
           return item;
         }
       });

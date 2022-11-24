@@ -8,12 +8,13 @@
         <div class="right">
           <div class="top">
             <p>{{ currentList.name }}</p>
-            <!-- <p>
+            <p>
               {{
                 `${currentList.classify.type} ${currentList.classify.region} ${currentList.classify.period}`
               }}
             </p>
-            <p>{{ currentList.duration }}</p> -->
+            <p>{{ currentList.duration }}</p>
+
             <p>{{ currentList.date }}</p>
           </div>
           <div class="bottom">
@@ -41,7 +42,11 @@
       <div class="bottom">
         <div class="time">
           观影时间:
-          <button v-for="(item, i) in tableData" @click="btn($event)" :data-key="i">
+          <button
+            v-for="(item, i) in tableData"
+            @click="btn($event)"
+            :data-key="i"
+          >
             {{ item.date }}
           </button>
         </div>
@@ -62,9 +67,9 @@
 </template>
 
 <script>
-import BigPicture from '@/components/bigPicture.vue';
+import BigPicture from "@/components/bigPicture.vue";
 export default {
-  name: 'selectVenue',
+  name: "selectVenue",
   data() {
     return {
       // name: '新神榜：杨戬',
@@ -92,28 +97,35 @@ export default {
   components: { BigPicture },
   created() {
     this.currentList = this.$root.getCurrentIdList(this.$route.params.id);
-    this.currentList.location.filter(item => {
+    this.currentList.location.filter((item) => {
       if (item.brand === this.$route.params.brand) {
         let obj = {
           date: item.date,
           children: [
-            { time: item.time, language: item.language, room: item.room, price: item.price },
+            {
+              time: item.time,
+              language: item.language,
+              room: item.room,
+              price: item.price,
+            },
           ],
         };
         console.log(obj);
         this.tableData.push(obj);
       }
     });
-    console.log('tableDate', this.tableData);
+    console.log("tableDate", this.tableData);
   },
   methods: {
     btn(e) {
       // console.log(e.target.getAttribute('data-key'));
-      this.index = parseInt(e.target.getAttribute('data-key'));
+      this.index = parseInt(e.target.getAttribute("data-key"));
     },
     goPayment(index) {
       console.log(index);
-      this.$router.push(`/home/payment/${this.$route.params.id}/${index}/step2`);
+      this.$router.push(
+        `/home/payment/${this.$route.params.id}/${index}/step2`
+      );
     },
   },
 };

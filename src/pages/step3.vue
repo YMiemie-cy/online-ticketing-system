@@ -17,7 +17,9 @@
           <span class="second">{{ second }}</span>
           秒内完成支付
         </p>
-        <p class="tip">超时订单会自动取消，如遇支付问题，请致电客服：1010-5335</p>
+        <p class="tip">
+          超时订单会自动取消，如遇支付问题，请致电客服：1010-5335
+        </p>
       </div>
     </div>
 
@@ -76,25 +78,21 @@
 </template>
 
 <script>
-import ProgressBar from '../components/progressBar.vue';
+import ProgressBar from "../components/progressBar.vue";
 export default {
-  name: 'step3',
+  name: "step3",
   data() {
     return {
       currentList: {},
-      tableData: [
-        {
-   
-        },
-      ],
+      tableData: [{}],
       min: 13,
       second: 59,
       flag: false,
       buyList: [
         {
           ifBuy: false,
-          imgUrl: '',
-          text: '支付成功',
+          imgUrl: "",
+          text: "支付成功",
         },
       ],
     };
@@ -103,7 +101,10 @@ export default {
     ProgressBar,
   },
   created() {
-    this.currentList = this.$root.getCurrentIdList(this.$route.params.id, this.$route.params.index);
+    this.currentList = this.$root.getCurrentIdList(
+      this.$route.params.id,
+      this.$route.params.index
+    );
     this.tableData = this.$root.buyTicket;
   },
   mounted() {
@@ -123,8 +124,8 @@ export default {
   computed: {
     totalPrice() {
       let sum = 0;
-      this.$root.buyTicket.map(item => {
-        sum += item.price;
+      this.$root.buyTicket.map((item) => {
+        sum += parseInt(item.price);
       });
       return sum;
     },

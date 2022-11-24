@@ -7,9 +7,8 @@ module.exports = defineConfig({
     proxy: {
       // 模拟
       "/api": {
-        target:
-          "https://console-mock.apipost.cn/mock/214735ef-b6da-4ec4-8fbf-1bf5af70915b",
-        // target: "http://localhost:8082",
+        // target: "https://console-mock.apipost.cn/mock/214735ef-b6da-4ec4-8fbf-1bf5af70915b",
+        target: "http://localhost:8082",
         ws: true,
         changeOrigin: true,
       },

@@ -32,7 +32,9 @@
           data-seq-no="202209190210144"
         >
           <div class="row-id-container">
-            <span class="row-id" v-for="(item, i) in seatList">{{ i + 1 }}</span>
+            <span class="row-id" v-for="(item, i) in seatList">{{
+              i + 1
+            }}</span>
           </div>
 
           <div class="seats-container">
@@ -60,7 +62,7 @@
       </div>
       <div class="right">
         <div class="top">
-          <img src="../assets/image.jpg" />
+          <img :src="currentList.description.gallery[0]" />
           <div>
             <p>{{ currentList.name }}</p>
             <p>类型:{{ currentList.classify.type }}</p>
@@ -92,25 +94,29 @@
 </template>
 
 <script>
-import ProgressBar from '../components/progressBar.vue';
+import ProgressBar from "../components/progressBar.vue";
 export default {
-  name: 'step2',
+  name: "step2",
 
   data() {
     return {
       currentList: {},
       seatList: [
-        ['false', 'false', 'false', 'false', 'false', 'false'],
-        ['false', 'false', 'false', 'false', 'false', 'false'],
-        ['false', 'false', 'true', 'false', 'false', 'false'],
-        ['false', 'false', 'false', 'false', 'false', 'false'],
-        ['false', 'false', 'false', 'true', 'false', 'false'],
+        // ["false", "false", "false", "false", "false", "false"],
+        // ["false", "false", "false", "false", "false", "false"],
+        // ["false", "false", "true", "false", "false", "false"],
+        // ["false", "false", "false", "false", "false", "false"],
+        // ["false", "false", "false", "true", "false", "false"],
       ],
     };
   },
   created() {
-    this.currentList = this.$root.getCurrentIdList(this.$route.params.id, this.$route.params.index);
+    this.currentList = this.$root.getCurrentIdList(
+      this.$route.params.id,
+      this.$route.params.index
+    );
     this.$root.buyTicket = [];
+    this.seatList = this.currentList.location[0].seats;
     // console.log('setp2', this.currentList);
     // this.seatList = this.currentList.location[0].seats;
   },
@@ -118,10 +124,10 @@ export default {
   computed: {
     totalPrice() {
       let sum = 0;
-      this.seatList.map(item => {
-        item.map(item2 => {
-          if (item2 === 'selected') {
-            sum += this.currentList.location[0].price;
+      this.seatList.map((item) => {
+        item.map((item2) => {
+          if (item2 === "selected") {
+            sum += parseInt(this.currentList.location[0].price);
           }
         });
       });
@@ -130,20 +136,20 @@ export default {
   },
   methods: {
     seatClick(e, tr, td) {
-      if (e.target.classList[0] === 'false') {
-        e.target.classList = 'selected';
+      if (e.target.classList[0] === "false") {
+        e.target.classList = "selected";
         // console.log(this.seatList[tr][td]);
         // this.seatList[tr][td] = 'selected';
-        this.$set(this.seatList[tr], td, 'selected');
-      } else if (e.target.classList[0] === 'selected') {
-        e.target.classList = 'false';
-        this.$set(this.seatList[tr], td, 'false');
+        this.$set(this.seatList[tr], td, "selected");
+      } else if (e.target.classList[0] === "selected") {
+        e.target.classList = "false";
+        this.$set(this.seatList[tr], td, "false");
       }
     },
     goStep3() {
       this.seatList.map((item, i) => {
         item.map((item2, j) => {
-          if (item2 === 'selected') {
+          if (item2 === "selected") {
             let obj = {
               title: this.currentList.name,
               time: this.currentList.location[0].date,
@@ -156,7 +162,9 @@ export default {
           }
         });
       });
-      this.$router.push(`/home/payment/${this.$route.params.id}/${this.$route.params.index}/step3`);
+      this.$router.push(
+        `/home/payment/${this.$route.params.id}/${this.$route.params.index}/step3`
+      );
     },
   },
 };

@@ -42,19 +42,16 @@
               ></path>
             </svg>
 
-            <img
-              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              class="image"
-            />
+            <img :src="item.description.gallery[0]" class="image" />
           </div>
 
           <div class="right">
             <div>
               <p>{{ item.name }}</p>
-              <p>{{ item.actors }}</p>
+              <!-- <p>{{ item.actors }}</p> -->
               <p>{{ item.date }}</p>
             </div>
-            <div>{{ item.rating }}</div>
+            <!-- <div>{{ item.rating }}</div> -->
           </div>
         </el-card>
       </li>
@@ -63,17 +60,20 @@
 </template>
 
 <script>
-import { getMovies } from '../api';
+import { getMovies } from "../api";
 export default {
-  name: 'ranking',
+  name: "ranking",
   data() {
     return {
-      list: [{ name: '片名', actors: '主演', date: '上映时间', rating: '评分' }],
+      list: [
+        { name: "片名", actors: "主演", date: "上映时间", rating: "评分" },
+      ],
     };
   },
   async created() {
     const res = await getMovies();
     this.list = res.data;
+    console.log("ranking", this.list);
   },
 };
 </script>

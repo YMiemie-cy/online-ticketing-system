@@ -58,39 +58,34 @@
           <div class="actor">
             <div>
               <h2>演职人员</h2>
-              <div><el-link type="info" @click="active = '2'">更多></el-link></div>
+              <div>
+                <el-link type="info" @click="active = '2'">更多></el-link>
+              </div>
             </div>
             <div>{{ currentList.description.actors }}</div>
           </div>
           <div class="images">
             <div>
               <h2>图集</h2>
-              <div><el-link type="info" @click="active = '3'">更多></el-link></div>
+              <div>
+                <el-link type="info" @click="active = '3'">更多></el-link>
+              </div>
             </div>
             <div class="content">
-              <div v-for="(item, index) in currentList.description.image.actor">
-                <img
-                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                  alt=""
-                />
+              <div v-for="(item, index) in currentList.description.gallery">
+                <img :src="item" alt="" />
               </div>
             </div>
           </div>
         </div>
         <div v-show="active === '2'" class="cast">
-          <div v-for="(item, index) in currentList.description.image.gallery">
-            <img
-              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              alt=""
-            />
+          <div v-for="(item, index) in currentList.description.actor">
+            <img :src="item" alt="" />
           </div>
         </div>
         <div v-show="active === '3'" class="atlas">
-          <div v-for="(item, index) in currentList.description.image.gallery">
-            <img
-              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              alt=""
-            />
+          <div v-for="(item, index) in currentList.description.gallery">
+            <img :src="item" alt="" />
           </div>
         </div>
       </el-main>
@@ -99,19 +94,24 @@
 </template>
 
 <script>
-import BigPicture from '../components/bigPicture.vue';
+import BigPicture from "../components/bigPicture.vue";
 export default {
-  name: 'movieDetail',
+  name: "movieDetail",
   data() {
     return {
-      active: '1',
+      active: "1",
       currentList: {},
     };
   },
   created() {
     // console.log(this.$route.params.id);
     this.currentList = this.$root.getCurrentIdList(this.$route.params.id);
-    console.log('detail', this.currentList, this.$route.params.id, this.$root.movieList);
+    console.log(
+      "detail",
+      this.currentList,
+      this.$route.params.id,
+      this.$root.movieList
+    );
   },
   methods: {
     buy() {

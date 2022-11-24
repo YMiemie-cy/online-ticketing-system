@@ -49,16 +49,22 @@
 
 <script>
 export default {
-  name: 'adminHome',
+  name: "adminHome",
   data() {
     return {
-      active: '/adminHome/index',
+      active: "/adminHome/index",
       navList: [
         {
-          title: '用户中心',
-          children: [{ path: '/adminHome/userInfo', title: '用户信息' }],
+          title: "用户中心",
+          children: [{ path: "/adminHome/userInfo", title: "用户信息" }],
         },
-        { title: '电影中心', children: [{ path: '/adminHome/filmCenter', title: '电影信息' }] },
+        {
+          title: "电影中心",
+          children: [
+            { path: "/adminHome/filmCenter", title: "电影信息" },
+            { path: "/adminHome/filmManagement", title: "电影管理" },
+          ],
+        },
       ],
     };
   },

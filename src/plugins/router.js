@@ -1,176 +1,184 @@
-import Vue from 'vue';
+import Vue from "vue";
 
-import VueRouter from 'vue-router';
+import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
-import Home from '../pages/home';
-import adminHome from '../pages/admin/adminHome';
-import userInfo from '../pages/admin/userInfo';
-import filmCenter from '../pages/admin/filmCenter';
-import Login from '../pages/login';
-import adminIndex from '../pages/admin/index';
-import Index from '../pages/index';
-import classification from '../pages/classification';
-import User from '../pages/user';
-import OrderDetails from '../pages/orderDetails';
-import Collection from '../pages/collection';
-import MovieDetail from '../pages/movieDetail';
-import SeatSelection from '../pages/seatSelection';
-import SelectVenue from '../pages/selectVenue';
-import Payment from '../pages/payment';
-import Step2 from '../pages/step2';
-import Step3 from '../pages/step3';
+import Home from "../pages/home";
+import adminHome from "../pages/admin/adminHome";
+import userInfo from "../pages/admin/userInfo";
+import filmCenter from "../pages/admin/filmCenter";
+import filmManagement from "../pages/admin/filmManagement";
+import Login from "../pages/login";
+import adminIndex from "../pages/admin/index";
+import Index from "../pages/index";
+import classification from "../pages/classification";
+import User from "../pages/user";
+import OrderDetails from "../pages/orderDetails";
+import Collection from "../pages/collection";
+import MovieDetail from "../pages/movieDetail";
+import SeatSelection from "../pages/seatSelection";
+import SelectVenue from "../pages/selectVenue";
+import Payment from "../pages/payment";
+import Step2 from "../pages/step2";
+import Step3 from "../pages/step3";
 
-
-
-let routes = [{
-    path: '/',
-    redirect: '/home/index'
+let routes = [
+  {
+    path: "/",
+    redirect: "/home/index",
   },
 
   {
-    path: '/home',
-    redirect: '/home/index',
+    path: "/home",
+    redirect: "/home/index",
     component: Home,
     meta: {
-      title: 'xx电影'
+      title: "xx电影",
     },
-    children: [{
-        path: 'index',
+    children: [
+      {
+        path: "index",
         component: Index,
         meta: {
-          title: 'xx电影'
+          title: "xx电影",
         },
       },
       {
-        path: 'classification',
+        path: "classification",
         component: classification,
         meta: {
-          title: '影院热映大片_热映电影票房_高清电影影视大全-xx电影'
+          title: "影院热映大片_热映电影票房_高清电影影视大全-xx电影",
         },
       },
       {
-        path: 'user',
+        path: "user",
         component: User,
-        redirect: 'user/orderDetails',
+        redirect: "user/orderDetails",
         meta: {
-          title: '用户中心'
+          title: "用户中心",
         },
-        children: [{
-            path: 'orderDetails',
+        children: [
+          {
+            path: "orderDetails",
             component: OrderDetails,
             meta: {
-              title: '用户中心'
+              title: "用户中心",
             },
           },
           {
-            path: 'collection',
+            path: "collection",
             component: Collection,
             meta: {
-              title: '收藏'
+              title: "收藏",
             },
-          }
-        ]
+          },
+        ],
       },
       {
-        path: 'detail/:id',
+        path: "detail/:id",
         component: MovieDetail,
         meta: {
-          title: '电影详情'
+          title: "电影详情",
         },
       },
       {
-        path: 'seatSelection/:id',
+        path: "seatSelection/:id",
         component: SeatSelection,
         meta: {
-          title: '选座'
+          title: "选座",
         },
-
       },
       {
-        path: 'selectVenue/:id/:brand',
+        path: "selectVenue/:id/:brand",
         component: SelectVenue,
         meta: {
-          title: '选座'
-        }
+          title: "选座",
+        },
       },
       {
-        path: 'payment/:id/:index',
+        path: "payment/:id/:index",
         component: Payment,
         meta: {
-          title: '支付'
+          title: "支付",
         },
-        children: [{
-            path: 'step2',
+        children: [
+          {
+            path: "step2",
             component: Step2,
             meta: {
-              title: '支付'
+              title: "支付",
             },
           },
           {
-            path: 'step3',
+            path: "step3",
             component: Step3,
             meta: {
-              title: '支付'
+              title: "支付",
             },
-          }
-        ]
-      }
-    ]
-
+          },
+        ],
+      },
+    ],
   },
   {
-    path: '/login',
+    path: "/login",
     component: Login,
     meta: {
-      title: 'xx电影-用户登录'
-    }
+      title: "xx电影-用户登录",
+    },
   },
   {
-    path: '/adminHome',
+    path: "/adminHome",
     component: adminHome,
-    redirect:'adminHome/index',
+    redirect: "adminHome/index",
     meta: {
-      title: '管理后台系统'
+      title: "管理后台系统",
     },
-    children: [{
-        path: 'index',
+    children: [
+      {
+        path: "index",
         component: adminIndex,
         meta: {
-          title: '管理后台系统'
-        }
+          title: "管理后台系统",
+        },
       },
       {
-        path: 'userInfo',
+        path: "userInfo",
         component: userInfo,
         meta: {
-          title: '管理后台系统'
-        }
+          title: "管理后台系统",
+        },
       },
       {
-        path: 'filmCenter',
+        path: "filmCenter",
         component: filmCenter,
         meta: {
-          title: '管理后台系统'
-        }
-      }
-    ]
-  }
-]
-
+          title: "管理后台系统",
+        },
+      },
+      {
+        path: "filmManagement",
+        component: filmManagement,
+        meta: {
+          title: "管理后台系统",
+        },
+      },
+      ,
+    ],
+  },
+];
 
 let router = new VueRouter({
-  mode: 'history',
-  routes
-})
+  mode: "history",
+  routes,
+});
 
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = to.meta.title;
   }
-  next()
-
-})
+  next();
+});
 
 export default router;
