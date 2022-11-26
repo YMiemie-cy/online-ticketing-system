@@ -1,6 +1,6 @@
 <template>
   <div id="filmManagement">
-    <el-form ref="form" label-width="110px">
+    <el-form ref="form" :model="form" label-width="110px">
       <el-form-item label="电影名称">
         <el-col :span="11"><el-input v-model="form.name"></el-input></el-col>
       </el-form-item>
@@ -71,54 +71,57 @@
       </el-form-item>
 
       <el-form-item label="电影院图片">
-        <el-input v-model="form.location.address" placeholder="url"></el-input>
+        <el-input
+          v-model="form.location[0].address"
+          placeholder="url"
+        ></el-input>
       </el-form-item>
 
       <el-form-item label="电影院排场日期">
         <el-input
-          v-model="form.location.date"
+          v-model="form.location[0].date"
           placeholder="例：11月24"
         ></el-input>
       </el-form-item>
 
       <el-form-item label="电影院信息">
-        <el-radio-group v-model="form.location.brand">
+        <el-radio-group v-model="form.location[0].brand">
           <el-radio
             v-for="item in seatList[0]"
             :label="item"
           ></el-radio> </el-radio-group
         ><br />
-        <el-radio-group v-model="form.location.district">
+        <el-radio-group v-model="form.location[0].district">
           <el-radio
             v-for="item in seatList[1]"
             :label="item"
           ></el-radio> </el-radio-group
         ><br />
-        <el-radio-group v-model="form.location.cinemaType">
+        <el-radio-group v-model="form.location[0].cinemaType">
           <el-radio v-for="item in seatList[2]" :label="item"></el-radio>
         </el-radio-group>
-        <el-radio-group v-model="form.location.service">
+        <el-radio-group v-model="form.location[0].service">
           <el-radio v-for="item in seatList[3]" :label="item"></el-radio>
         </el-radio-group>
       </el-form-item>
 
       <el-form-item label="电影院地址">
         <el-input
-          v-model="form.location.information"
+          v-model="form.location[0].information"
           placeholder="xxxxx"
         ></el-input>
       </el-form-item>
 
       <el-form-item label="电影价格">
         <el-col :span="11">
-          <el-input v-model="form.location.price" placeholder="53"></el-input
+          <el-input v-model="form.location[0].price" placeholder="53"></el-input
         ></el-col>
       </el-form-item>
 
-      <el-form-item label="时长">
+      <el-form-item label="影院时长">
         <el-col :span="11">
           <el-input
-            v-model="form.location.time"
+            v-model="form.location[0].time"
             placeholder="100分钟"
           ></el-input
         ></el-col>
@@ -127,7 +130,7 @@
       <el-form-item label="语言">
         <el-col :span="11">
           <el-input
-            v-model="form.location.language"
+            v-model="form.location[0].language"
             placeholder="国语"
           ></el-input
         ></el-col>
@@ -135,7 +138,10 @@
 
       <el-form-item label="厅号">
         <el-col :span="11">
-          <el-input v-model="form.location.room" placeholder="5号厅"></el-input
+          <el-input
+            v-model="form.location[0].room"
+            placeholder="5号厅"
+          ></el-input
         ></el-col>
       </el-form-item>
 
@@ -154,6 +160,7 @@
 </template>
 
 <script>
+import { addMovies } from "../../api";
 export default {
   name: "filmManagement",
   data() {
@@ -352,39 +359,44 @@ export default {
         date: "",
         description: {
           text: "",
+          comments: [],
           actors: "",
           actor: [],
           gallery: [],
         },
-        location: {
-          information: "",
-          seats: [
-            ["false", "false", "false", "false", "false", "false"],
-            ["false", "false", "false", "false", "false", "false"],
-            ["false", "false", "true", "false", "false", "false"],
-            ["false", "false", "false", "false", "false", "false"],
-            ["false", "false", "false", "true", "false", "false"],
-          ],
-          date: "",
-          brand: "",
-          district: "",
-          cinemaType: "",
-          service: "",
-          address: "",
-          price: "",
-          time: "",
-          language: "",
-          room: "",
-        },
+        location: [
+          {
+            information: "",
+            seats: [
+              ["false", "false", "false", "false", "false", "false"],
+              ["false", "false", "false", "false", "false", "false"],
+              ["false", "false", "true", "false", "false", "false"],
+              ["false", "false", "false", "false", "false", "false"],
+              ["false", "false", "false", "true", "false", "false"],
+            ],
+            date: "",
+            brand: "",
+            district: "",
+            cinemaType: "",
+            service: "",
+            address: "",
+            price: "",
+            time: "",
+            language: "",
+            room: "",
+          },
+        ],
         rating: "",
       },
     };
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       this.form.description.actor = this.form.description.actor.split(",");
       this.form.description.gallery = this.form.description.gallery.split(",");
       console.log("form", this.form);
+      const res = await addMovies(this.form);
+      console.log("res", res);
     },
   },
 };

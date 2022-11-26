@@ -78,6 +78,7 @@
 </template>
 
 <script>
+import { buyMovies, getMovies } from "../api";
 import ProgressBar from "../components/progressBar.vue";
 export default {
   name: "step3",
@@ -106,6 +107,7 @@ export default {
       this.$route.params.index
     );
     this.tableData = this.$root.buyTicket;
+    console.log("tableData", this.tableData);
   },
   mounted() {
     let timer = setInterval(() => {
@@ -135,11 +137,32 @@ export default {
       this.flag = false;
       this.$router.go(-1);
     },
-    buy() {
-      this.buyList[0].ifBuy = true;
-      setTimeout(() => {
-        this.buyList[0].ifBuy = false;
-      }, 3000);
+    async buy() {
+      const username = JSON.parse(localStorage.getItem("token")).username;
+
+      this.tableData.filter(async (item) => {
+        const tickInformation = {
+          brand: this.currentList.location[0].brand,
+          name: this.currentList.name,
+          date: this.currentList.location[0].date,
+          seatNumber: `${this.currentList.location[0].room} ${item.seat}`,
+          image: this.currentList.description.gallery[0],
+          price: this.currentList.location[0].price,
+          information: this.currentList.location[0].information,
+        };
+        console.log("username", username);
+        console.log("tickInformation", tickInformation);
+        const res = await buyMovies(username, tickInformation);
+        if (res.data.code === 200) {
+          const res2 = await getMovies();
+          this.$root.movieList = res2.data;
+          this.buyList[0].ifBuy = true;
+          setTimeout(() => {
+            this.buyList[0].ifBuy = false;
+            this.$router.push("/home/index");
+          }, 2000);
+        }
+      });
     },
   },
 };

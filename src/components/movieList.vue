@@ -21,7 +21,7 @@
     <el-pagination
       background
       layout="prev, pager, next"
-      :total="currentList.length / 8"
+      :total="(len / 8) * 10"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     ></el-pagination>
@@ -41,9 +41,27 @@ const getClassify = (that) => {
       return item;
     } else {
       if (
-        item.classify.type === that.classify.type &&
-        item.classify.region === that.classify.region &&
-        item.classify.period === that.classify.period
+        (item.classify.type === that.classify.type &&
+          item.classify.region === that.classify.region &&
+          item.classify.period === that.classify.period) ||
+        (that.classify.type === "全部" &&
+          that.classify.region === "全部" &&
+          item.classify.period === that.classify.period) ||
+        (that.classify.type === "全部" &&
+          item.classify.region === that.classify.region &&
+          that.classify.period === "全部") ||
+        (item.classify.type === that.classify.type &&
+          that.classify.region === "全部" &&
+          that.classify.period === "全部") ||
+        (that.classify.type === "全部" &&
+          item.classify.region === that.classify.region &&
+          item.classify.period === that.classify.period) ||
+        (item.classify.type === that.classify.type &&
+          that.classify.region === "全部" &&
+          item.classify.period === that.classify.period) ||
+        (item.classify.type === that.classify.type &&
+          item.classify.region === that.classify.region &&
+          that.classify.period === "全部")
       ) {
         return item;
       } else {
@@ -51,8 +69,30 @@ const getClassify = (that) => {
       }
     }
   });
-  that.currentList = that.movieList;
-  console.log(that.movieList);
+
+  getCurrentList(that, 1);
+
+  console.log("movieList22", that.currentList);
+};
+const getLength = (that) => {
+  that.len = 0;
+  that.movieList.map((item) => {
+    if (item.id) {
+      that.len++;
+    }
+  });
+};
+const getCurrentList = (that, val) => {
+  let i = -1;
+  const resList = that.movieList.filter((item) => {
+    if (item.id) {
+      i++;
+      if (i >= (val - 1) * 8 && i <= (val - 1) * 8 + 7) {
+        return item;
+      }
+    }
+  });
+  that.currentList = resList;
 };
 
 export default {
@@ -61,6 +101,7 @@ export default {
     return {
       movieList: [],
       currentList: [],
+      len: 0,
     };
   },
   props: {
@@ -69,11 +110,11 @@ export default {
     },
   },
   async created() {
-    // console.log('created', this.classify);
     const res = await getMovies();
-    // console.log('APP2', res.data);
+
     this.$root.movieList = res.data;
     getClassify(this);
+    getLength(this);
     this.currentList = this.movieList.filter((item, index) => {
       if (index >= 0 && index <= 7) {
         return item;
@@ -84,8 +125,9 @@ export default {
     classify: {
       handler(newValue, oldValue) {
         getClassify(this);
-        // console.log('watch', this.classify);
-        console.log("watch", this.currentList);
+
+        // console.log("watch22", this.currentList);
+        getLength(this);
       },
       deep: true, //深度检测  针对符合类型
       immediate: true, //首次运行
@@ -96,13 +138,9 @@ export default {
       console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val = 1) {
-      console.log(`当前页: ${val}`);
-      const resList = this.movieList.filter((item, index) => {
-        if (index >= val - 1 && index <= val + 7) {
-          return item;
-        }
-      });
-      this.currentList = resList;
+      console.log(`当前页: ${val} `);
+      getCurrentList(this, val);
+      getLength(this);
     },
   },
 };

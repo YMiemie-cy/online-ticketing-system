@@ -9,10 +9,10 @@
             <el-input v-model="loginList.username" placeholder="请输入账号"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-input v-model="loginList.password" placeholder="请输入密码"></el-input>
+            <el-input type="password" v-model="loginList.password" placeholder="请输入密码"></el-input>
           </el-form-item>
         </el-form>
-        <el-button type="primary" @click="log" round>登录</el-button>
+        <el-button type="primary" @click="log"  round>登录</el-button>
         <el-link :underline="false" @click="show = false">注册</el-link>
       </div>
 
@@ -30,7 +30,7 @@
           <el-form-item prop="email">
             <el-input v-model="ruleForm.email" placeholder="请输入邮箱"></el-input>
             <!-- <el-link :underline="false" @click="sendEmail" ref="eleCode">111</el-link> -->
-            <input type="button" :value="codeText" @click="codeTimer" ref="elecode" ></input>
+            <input type="button" :value="codeText" @click="sendEmail" ref="elecode"></input>
           </el-form-item>
           <el-form-item prop="pass">
             <el-input type="password" v-model="ruleForm.pass" placeholder="请输入密码"></el-input>
@@ -48,7 +48,7 @@
         <label>from_name</label>
         <input type="text" name="from_name" value="LingYi" />
         <label>to_name</label>
-        <input type="text" name="to_name" value="390017890@qq.com" />
+        <input type="text" name="to_name" :value="ruleForm.email" />
         <label>Message</label>
         <input type="text" name="message" :value="code" />
       </form>
@@ -128,7 +128,16 @@ export default {
         password: this.loginList.password,
       });
       if(res.data.code === 200){
-        this.$router.push('/home/index')
+        const obj = {username: this.loginList.username,token: res.data.data.token};
+        localStorage.setItem("token",JSON.stringify(obj));
+        if(this.loginList.username  === 'admin'){
+          this.$router.push('/adminHome');
+        }else{
+
+          this.$router.push('/home/index');
+        }
+        this.loginList.username = "";
+        this.loginList.password = "";
       }
     },
      reg(formName) {
@@ -138,8 +147,11 @@ export default {
             username: this.ruleForm.email,
             password: this.ruleForm.pass,
           });
-          console.log('reg',res);
-          alert('submit!');
+          this.show = true;
+          this.$alert('注册成功', '消息提示', {
+          confirmButtonText: '确定',
+          
+        });
         } else {
           console.log('error submit!!');
           return false;
@@ -151,21 +163,23 @@ export default {
     },
     sendEmail() {
       this.codeTimer();
-      // emailjs
-      //   .sendForm('service_pkon8ni', 'template_6fs6slm', this.$refs.form, 'WEXETXzwjHGVTHR3U')
-      //   .then(
-      //     result => {
-      //       console.log('SUCCESS!', result.text);
-      //     },
-      //     error => {
-      //       console.log('FAILED...', error.text);
-      //     }
-      //   );
+      setTimeout(() => {
+        emailjs
+          .sendForm('service_pkon8ni', 'template_6fs6slm', this.$refs.form, 'WEXETXzwjHGVTHR3U')
+          .then(
+            result => {
+              console.log('SUCCESS!', result.text);
+            },
+            error => {
+              console.log('FAILED...', error.text);
+            }
+          );
+      }, 1000);
 
       
     },
     codeTimer() {
-      let time = 10;
+      let time = 60;
       this.$refs.elecode.setAttribute('disabled','true')
       this.code = parseInt(Math.random()*10000);
       console.log(this.code);

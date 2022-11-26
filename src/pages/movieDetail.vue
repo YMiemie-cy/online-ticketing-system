@@ -4,7 +4,10 @@
       <BigPicture>
         <div>
           <div class="left">
-            <img src="../assets/logo.png" alt="" />
+            <img
+              :src="currentList.description.gallery[0]"
+              style="width: 200px; height: 280px"
+            />
           </div>
           <div class="right">
             <div class="top">
@@ -73,7 +76,7 @@
             </div>
             <div class="content">
               <div v-for="(item, index) in currentList.description.gallery">
-                <img :src="item" alt="" />
+                <img :src="item" v-if="index === 0" alt="" />
               </div>
             </div>
           </div>
@@ -127,12 +130,22 @@ export default {
 
 <style scoped lang="scss">
 .bot-main {
+  img {
+    width: 116px;
+    height: 161px;
+  }
   > div > div > div {
     width: 100%;
     height: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .top {
+    .left {
+      img {
+      }
+    }
   }
   .images {
     .content {

@@ -1,5 +1,5 @@
 import axios from "../plugins/axios";
-import qs from "Qs";
+import qs from "qs";
 
 //登录
 // export const getLogin = async ({
@@ -30,4 +30,27 @@ export const postReg = async ({ username, password }) =>
     url: "/register",
   });
 
-//自动登录
+// 获取用户信息
+export const getUserInfo = async (username) =>
+  axios.get("user/findAllTickByName", {
+    params: { username: username },
+  });
+
+// 获取用户列表
+export const getUserList = async () => axios.get("user/findAllTick");
+
+// 电影票购买
+export const buyMovies = async (username, tickInformation) => {
+  let data1 = JSON.stringify({
+    username: username,
+    tickInformation: [tickInformation],
+  });
+  console.log("data1", data1);
+  return axios({
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    // headers: { "content-type": "application/x-www-form-urlencoded" },
+    data: data1,
+    url: "/user/ByTick",
+  });
+};

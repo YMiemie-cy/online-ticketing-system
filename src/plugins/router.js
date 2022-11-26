@@ -34,14 +34,14 @@ let routes = [
     redirect: "/home/index",
     component: Home,
     meta: {
-      title: "xx电影",
+      title: "ikun电影",
     },
     children: [
       {
         path: "index",
         component: Index,
         meta: {
-          title: "xx电影",
+          title: "ikun电影",
         },
       },
       {
@@ -125,7 +125,7 @@ let routes = [
     path: "/login",
     component: Login,
     meta: {
-      title: "xx电影-用户登录",
+      title: "ikun电影-用户登录",
     },
   },
   {
@@ -177,6 +177,13 @@ let router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = to.meta.title;
+  }
+  if (to.path === "/home/user/orderDetails") {
+    if (localStorage.getItem("token")) {
+      next();
+    } else {
+      next("/login");
+    }
   }
   next();
 });

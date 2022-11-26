@@ -8,14 +8,22 @@
         class="list_item"
       >
         <el-card shadow="hover" v-if="item.id" class="card">
-          <img
-            src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-            class="image"
-          />
+          <img :src="item.description.gallery[0]" class="image" />
+
+          <div class="left">
+            <p>{{ item.name }}</p>
+            <p>
+              {{
+                `${item.classify.type} ${item.classify.region} ${item.classify.period}`
+              }}
+            </p>
+            <p>{{ item.date }}</p>
+          </div>
 
           <div class="right">
-            <span>{{ item.name }}</span>
-            <span>{{ item.date }}</span>
+            <el-button type="primary" round @click="del(item.id)"
+              >删除</el-button
+            >
           </div>
         </el-card>
       </el-col>
@@ -24,7 +32,7 @@
 </template>
 
 <script>
-import { getMovies } from "../../api";
+import { getMovies, delMovies } from "../../api";
 
 export default {
   name: "filmCenter",
@@ -38,6 +46,13 @@ export default {
     this.$root.movieList = res.data;
     this.currentList = this.$root.movieList;
   },
+  methods: {
+    async del(id) {
+      console.log(id);
+      const res = await delMovies(id);
+      console.log("del", res);
+    },
+  },
 };
 </script>
 
@@ -47,9 +62,15 @@ export default {
     .list_item {
       ::v-deep .el-card__body {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
         img {
+          width: 116px;
+          height: 161px;
+          margin-right: 10%;
+        }
+        .left {
+          margin-right: 60%;
         }
         .right {
         }

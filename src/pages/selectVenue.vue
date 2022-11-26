@@ -3,7 +3,10 @@
     <BigPicture>
       <div>
         <div class="left">
-          <img src="../assets/logo.png" alt="" />
+          <img
+            :src="currentList.description.gallery[0]"
+            style="width: 200px; height: 280px"
+          />
         </div>
         <div class="right">
           <div class="top">
@@ -72,26 +75,9 @@ export default {
   name: "selectVenue",
   data() {
     return {
-      // name: '新神榜：杨戬',
-      // Classification: '动画 冒险 动作',
-      // time: '中国大陆/127分钟',
-      // date: '2022-08-19 09:00中国大陆上映',
       index: 0,
       currentList: {},
-      tableData: [
-        // {
-        //   date: '今天9月16',
-        //   children: [{ time: '16:15', language: '中文2D', room: 'xxxx', price: '￥43' }],
-        // },
-        // {
-        //   date: '今天9月17',
-        //   children: [{ time: '17:15', language: '中文3D', room: 'xxxx', price: '￥23' }],
-        // },
-        // {
-        //   date: '今天9月18',
-        //   children: [{ time: '18:15', language: '中文2D', room: 'xxxx', price: '￥13' }],
-        // },
-      ],
+      tableData: [],
     };
   },
   components: { BigPicture },
@@ -122,10 +108,13 @@ export default {
       this.index = parseInt(e.target.getAttribute("data-key"));
     },
     goPayment(index) {
-      console.log(index);
-      this.$router.push(
-        `/home/payment/${this.$route.params.id}/${index}/step2`
-      );
+      if (localStorage.getItem("token")) {
+        this.$router.push(
+          `/home/payment/${this.$route.params.id}/${index}/step2`
+        );
+      } else {
+        this.$router.push("/login");
+      }
     },
   },
 };
@@ -148,7 +137,7 @@ export default {
       align-items: center;
     }
     .content {
-      width: 300px;
+      width: 414px;
       display: flex;
       justify-content: space-between;
       align-items: center;

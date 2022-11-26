@@ -1,27 +1,23 @@
 <template>
   <div id="orderDetails">
     <ul>
-      <li v-for="(item, i) in 10">
+      <li v-for="(item, i) in tickInformation">
         <el-card shadow="hover" class="card">
-          <div class="top">电影院名</div>
+          <div class="top">{{ item.brand }}</div>
           <div class="main">
             <div class="left">
-              <img
-                src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                class="image"
-              />
+              <img :src="item.image" class="image" />
             </div>
 
             <div class="right">
               <div>
-                <p>{{ name }}</p>
-                <p>{{ date }}</p>
-                <p>{{ seatNumber }}</p>
+                <p>{{ item.name }}</p>
+                <p>{{ item.date }}</p>
+                <p>{{ item.seatNumber }}</p>
               </div>
-              <div>{{ score }}</div>
             </div>
           </div>
-          <div class="foot">总价：</div>
+          <div class="foot">总价：{{ item.price }}</div>
         </el-card>
       </li>
     </ul>
@@ -29,14 +25,18 @@
 </template>
 
 <script>
+import { getUserInfo } from "../api";
 export default {
-  name: 'orderDetails',
+  name: "orderDetails",
   data() {
     return {
-      name: '叶问4：完结篇',
-      date: '2019年12月31日 21:10',
-      seatNumber: '3号厅 7排2座',
+      tickInformation: [],
     };
+  },
+  async created() {
+    const username = JSON.parse(localStorage.getItem("token")).username;
+    const res = await getUserInfo(username);
+    this.tickInformation = res.data.tickInformation;
   },
 };
 </script>
@@ -51,7 +51,7 @@ li {
     width: 100%;
     height: 100%;
 
-    /deep/ .el-card__body {
+    ::v-deep .el-card__body {
       width: 100%;
       height: 100%;
       padding: 0;

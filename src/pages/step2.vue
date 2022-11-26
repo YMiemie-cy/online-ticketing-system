@@ -51,9 +51,7 @@
                     @click="seatClick($event, index, i)"
                     :class="td"
                     :key="i"
-                  >
-                    {{ i + 1 }}
-                  </td>
+                  ></td>
                 </tr>
               </table>
             </div>
@@ -116,6 +114,7 @@ export default {
       this.$route.params.index
     );
     this.$root.buyTicket = [];
+
     this.seatList = this.currentList.location[0].seats;
     // console.log('setp2', this.currentList);
     // this.seatList = this.currentList.location[0].seats;

@@ -3,13 +3,7 @@
     用户中心
     <el-container>
       <el-aside width="200px">
-        <el-menu
-          :default-active="active"
-          class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
-          router
-        >
+        <el-menu :default-active="active" class="el-menu-vertical-demo" router>
           <el-menu-item v-for="(item, i) in list" :index="item.path" :key="i">
             <i class="el-icon-setting"></i>
             <span slot="title">{{ item.title }}</span>
@@ -25,16 +19,17 @@
 
 <script>
 export default {
-  name: 'user',
+  name: "user",
   data() {
     return {
-      active: '',
+      active: "",
       list: [
-        { title: '订单详情', path: '/home/user/orderDetails' },
-        { title: '收藏', path: '/home/user/collection' },
+        { title: "订单详情", path: "/home/user/orderDetails" },
+        { title: "收藏", path: "/home/user/collection" },
       ],
     };
   },
+  created() {},
   watch: {
     $route: {
       handler(newName, oldName) {

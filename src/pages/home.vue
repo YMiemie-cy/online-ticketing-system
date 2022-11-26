@@ -2,8 +2,17 @@
   <div id="home">
     <el-container>
       <el-header>
-        <el-menu :default-active="active" class="el-menu-demo" mode="horizontal" router>
-          <el-menu-item v-for="(item, i) in navList" :index="item.path" :key="item.path">
+        <el-menu
+          :default-active="active"
+          class="el-menu-demo"
+          mode="horizontal"
+          router
+        >
+          <el-menu-item
+            v-for="(item, i) in navList"
+            :index="item.path"
+            :key="item.path"
+          >
             {{ item.title }}
           </el-menu-item>
           <el-submenu index="5" class="userCenter">
@@ -12,7 +21,9 @@
                 src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
               ></el-avatar>
             </template>
-            <el-menu-item @click="$router.push('/home/user/orderDetails')">个人中心</el-menu-item>
+            <el-menu-item @click="$router.push('/home/user/orderDetails')"
+              >个人中心</el-menu-item
+            >
             <el-menu-item @click="exit">退出</el-menu-item>
           </el-submenu>
         </el-menu>
@@ -27,14 +38,14 @@
 
 <script>
 export default {
-  name: 'home',
+  name: "home",
   data() {
     return {
       navList: [
-        { title: '首页', path: '/home/index' },
-        { title: '分类', path: '/home/classification' },
+        { title: "首页", path: "/home/index" },
+        { title: "分类", path: "/home/classification" },
       ],
-      active: '',
+      active: "",
     };
   },
   watch: {
@@ -48,7 +59,8 @@ export default {
   },
   methods: {
     exit() {
-      this.$router.push('/login');
+      localStorage.removeItem("token");
+      this.$router.push("/login");
     },
   },
 };

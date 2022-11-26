@@ -3,7 +3,7 @@
     <BigPicture>
       <div>
         <div class="left">
-          <img src="../assets/logo.png" alt="" />
+          <img :src="currentList.location[0].address" alt="" />
         </div>
         <div class="right">
           <div class="top">
@@ -14,7 +14,7 @@
               }}
             </p>
             <p>{{ currentList.duration }}</p>
-            <p>{{ currentList.location[0].information }}</p>
+            <!-- <p>{{ currentList.location[0].information }}</p> -->
           </div>
           <div class="bottom">
             <div class="btn">
@@ -38,7 +38,7 @@
         <div v-for="(item, i) in cinemaList">
           <div class="left">
             <p>{{ item.brand }}</p>
-            <p>{{ item.address }}</p>
+            <p>{{ item.information }}</p>
           </div>
           <div class="right">
             <div>{{ item.price }}</div>
@@ -67,11 +67,46 @@ const getCinemaList = (that) => {
       return item;
     } else {
       if (
-        item.date === that.localClassify.date &&
-        item.brand === that.localClassify.brand &&
-        item.district === that.localClassify.district &&
-        item.cinemaType === that.localClassify.cinemaType &&
-        item.service === that.localClassify.service
+        (item.date === that.localClassify.date &&
+          item.brand === that.localClassify.brand &&
+          item.district === that.localClassify.district &&
+          item.cinemaType === that.localClassify.cinemaType &&
+          item.service === that.localClassify.service) ||
+        (that.localClassify.date === item.date &&
+          that.localClassify.brand === "全部" &&
+          that.localClassify.district === "全部" &&
+          that.localClassify.cinemaType === "全部" &&
+          that.localClassify.service === "全部") ||
+        (that.localClassify.date === "全部" &&
+          that.localClassify.brand === item.brand &&
+          that.localClassify.district === "全部" &&
+          that.localClassify.cinemaType === "全部" &&
+          that.localClassify.service === "全部") ||
+        (that.localClassify.date === "全部" &&
+          that.localClassify.brand === "全部" &&
+          that.localClassify.district === item.district &&
+          that.localClassify.cinemaType === "全部" &&
+          that.localClassify.service === "全部") ||
+        (that.localClassify.date === "全部" &&
+          that.localClassify.brand === "全部" &&
+          that.localClassify.district === "全部" &&
+          that.localClassify.cinemaType === item.cinemaType &&
+          that.localClassify.service === "全部") ||
+        (that.localClassify.date === "全部" &&
+          that.localClassify.brand === "全部" &&
+          that.localClassify.district === "全部" &&
+          that.localClassify.cinemaType === "全部" &&
+          that.localClassify.service === item.service) ||
+        ((that.localClassify.date === item.date ||
+          that.localClassify.date === "全部") &&
+          (that.localClassify.brand === item.brand ||
+            that.localClassify.brand === "全部") &&
+          (that.localClassify.district === item.district ||
+            that.localClassify.district === "全部") &&
+          (that.localClassify.cinemaType === item.cinemaType ||
+            that.localClassify.cinemaType === "全部") &&
+          (that.localClassify.service === item.service ||
+            that.localClassify.service === "全部"))
       ) {
         return item;
       } else {
