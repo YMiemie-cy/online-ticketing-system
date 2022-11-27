@@ -1,31 +1,29 @@
 <template>
   <div id="selectVenue">
     <BigPicture>
-      <div>
-        <div class="left">
-          <img
-            :src="currentList.description.gallery[0]"
-            style="width: 200px; height: 280px"
-          />
-        </div>
-        <div class="right">
-          <div class="top">
-            <p>{{ currentList.name }}</p>
-            <p>
-              {{
-                `${currentList.classify.type} ${currentList.classify.region} ${currentList.classify.period}`
-              }}
-            </p>
-            <p>{{ currentList.duration }}</p>
+      <div class="left">
+        <img
+          :src="currentList.description.gallery[0]"
+          style="width: 200px; height: 280px"
+        />
+      </div>
+      <div class="right">
+        <div class="top">
+          <p>{{ currentList.name }}</p>
+          <p>
+            {{
+              `${currentList.classify.type} ${currentList.classify.region} ${currentList.classify.period}`
+            }}
+          </p>
+          <p>{{ currentList.duration }}</p>
 
-            <p>{{ currentList.date }}</p>
+          <p>{{ currentList.date }}</p>
+        </div>
+        <div class="bottom">
+          <div class="btn">
+            <el-button>特惠购票</el-button>
           </div>
-          <div class="bottom">
-            <div class="btn">
-              <el-button>特惠购票</el-button>
-            </div>
-            <div class="score">口碑、票房</div>
-          </div>
+          <div class="score">口碑、票房</div>
         </div>
       </div>
     </BigPicture>
@@ -89,7 +87,7 @@ export default {
           date: item.date,
           children: [
             {
-              time: item.time,
+              time: item.date,
               language: item.language,
               room: item.room,
               price: item.price,
@@ -141,6 +139,36 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+  }
+  .bottom {
+    .time {
+      button {
+        display: inline-block;
+        line-height: 1;
+        white-space: nowrap;
+        cursor: pointer;
+        background: #fff;
+        border: 1px solid #dcdfe6;
+        border-color: #dcdfe6;
+        color: #606266;
+
+        text-align: center;
+        box-sizing: border-box;
+        outline: 0;
+        margin: 0;
+        transition: 0.1s;
+        font-weight: 500;
+
+        padding: 5px 14px;
+        font-size: 14px;
+        border-radius: 4px;
+        &:hover {
+          color: #f4606c;
+          border-color: #fccfd3;
+          background-color: #feeff0;
+        }
+      }
     }
   }
 }

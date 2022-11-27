@@ -1,27 +1,25 @@
 <template>
   <div id="seatSelection">
     <BigPicture>
-      <div>
-        <div class="left">
-          <img :src="currentList.location[0].address" alt="" />
+      <div class="left">
+        <img :src="currentList.location[0].address" style="width: 250px" />
+      </div>
+      <div class="right" style="width: 300px">
+        <div class="top">
+          <p>{{ currentList.name }}</p>
+          <p>
+            {{
+              `${currentList.classify.type}  ${currentList.classify.period} ${currentList.classify.region}`
+            }}
+          </p>
+          <p>{{ currentList.duration }}</p>
+          <p>{{ currentList.location[0].information }}</p>
         </div>
-        <div class="right">
-          <div class="top">
-            <p>{{ currentList.name }}</p>
-            <p>
-              {{
-                `${currentList.classify.type}  ${currentList.classify.period} ${currentList.classify.region}`
-              }}
-            </p>
-            <p>{{ currentList.duration }}</p>
-            <!-- <p>{{ currentList.location[0].information }}</p> -->
+        <div class="bottom" style="width: 100%">
+          <div class="btn">
+            <el-button @click="viewDetails">查看更多电影详情</el-button>
           </div>
-          <div class="bottom">
-            <div class="btn">
-              <el-button @click="viewDetails">查看更多电影详情</el-button>
-            </div>
-            <div class="score">口碑、票房</div>
-          </div>
+          <div class="score">口碑、票房</div>
         </div>
       </div>
     </BigPicture>

@@ -2,30 +2,28 @@
   <div id="movieDetail">
     <div class="top">
       <BigPicture>
-        <div>
-          <div class="left">
-            <img
-              :src="currentList.description.gallery[0]"
-              style="width: 200px; height: 280px"
-            />
+        <div class="left">
+          <img
+            :src="currentList.description.gallery[0]"
+            style="width: 200px; height: 280px"
+          />
+        </div>
+        <div class="right">
+          <div class="top">
+            <p>{{ currentList.name }}</p>
+            <p>
+              {{
+                `${currentList.classify.type}  ${currentList.classify.period} ${currentList.classify.region}`
+              }}
+            </p>
+            <p>{{ currentList.duration }}</p>
+            <p>{{ currentList.date }}</p>
           </div>
-          <div class="right">
-            <div class="top">
-              <p>{{ currentList.name }}</p>
-              <p>
-                {{
-                  `${currentList.classify.type}  ${currentList.classify.period} ${currentList.classify.region}`
-                }}
-              </p>
-              <p>{{ currentList.time }}</p>
-              <p>{{ currentList.date }}</p>
+          <div class="bottom">
+            <div class="btn">
+              <el-button @click="buy">特惠购票</el-button>
             </div>
-            <div class="bottom">
-              <div class="btn">
-                <el-button @click="buy">特惠购票</el-button>
-              </div>
-              <div class="score">口碑、票房</div>
-            </div>
+            <div class="score">口碑、票房</div>
           </div>
         </div>
       </BigPicture>
@@ -141,12 +139,7 @@ export default {
     justify-content: space-between;
     align-items: center;
   }
-  .top {
-    .left {
-      img {
-      }
-    }
-  }
+
   .images {
     .content {
       justify-content: flex-start;

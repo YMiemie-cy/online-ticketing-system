@@ -1,6 +1,8 @@
 <template>
   <div id="login">
-    <div class="left">logo</div>
+    <div class="left">
+      <img src="../assets/审核中.png" alt="">
+    </div>
     <div class="right">
       <div class="logIndex" v-show="show">
         <h2>登录</h2>
@@ -30,7 +32,7 @@
           <el-form-item prop="email">
             <el-input v-model="ruleForm.email" placeholder="请输入邮箱"></el-input>
             <!-- <el-link :underline="false" @click="sendEmail" ref="eleCode">111</el-link> -->
-            <input type="button" :value="codeText" @click="sendEmail" ref="elecode"></input>
+            <input type="button" :value="codeText" @click="sendEmail" ref="elecode" id="codeText"></input>
           </el-form-item>
           <el-form-item prop="pass">
             <el-input type="password" v-model="ruleForm.pass" placeholder="请输入密码"></el-input>
@@ -212,6 +214,10 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  img{
+    width: 500px;
+    height: 500px;
+  }
 }
 .right {
   display: flex;
@@ -220,10 +226,42 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  .logIndex{
+    .el-button{
+      margin-right: 50px;
+      width: 80px;
+    }
+  }
 }
 }
 
+#codeText{
+  display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    border-color: #dcdfe6;
+    color: #606266;
+    
+    text-align: center;
+    box-sizing: border-box;
+    outline: 0;
+    margin: 0;
+    transition: .1s;
+    font-weight: 500;
 
+    padding: 8px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    margin-top: 15px;
+    &:hover{
+      color: #f4606c;
+    border-color: #fccfd3;
+    background-color: #feeff0;
+    }
+}
 .el-input /deep/ .el-input__inner {
   border-top: none;
   border-left: none;

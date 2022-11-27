@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'bigPicture',
+  name: "bigPicture",
   data() {
     return {};
   },
@@ -16,24 +16,24 @@ export default {
 
 <style scoped lang="scss">
 #bigPicture {
-  width: 100%;
+  width: 100vw;
   height: 300px;
   color: white;
   background-image: url(../assets/banner_bg.png);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   .left {
-    float: left;
+    margin-left: 20px;
+    margin-right: 100px;
   }
   .right {
-    float: left;
     .bottom {
       width: 200px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    // .top {
-    //   height: 300px;
-    // }
   }
 }
 </style>

@@ -168,18 +168,20 @@ export default {
 }
 .left {
   height: 100%;
-  width: 30%;
+  width: 35%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-right: 50px;
 }
 .left svg {
   height: 100%;
   width: 150px;
 }
 .left img {
-  height: 50px;
-  width: 50px;
+  height: auto;
+  width: 80px;
+  float: right;
 }
 .right {
   flex: 1;

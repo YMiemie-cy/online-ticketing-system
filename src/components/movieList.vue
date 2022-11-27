@@ -125,8 +125,6 @@ export default {
     classify: {
       handler(newValue, oldValue) {
         getClassify(this);
-
-        // console.log("watch22", this.currentList);
         getLength(this);
       },
       deep: true, //深度检测  针对符合类型
@@ -150,14 +148,18 @@ export default {
 #movieList {
   height: 100%;
   width: 70%;
-  /deep/ .el-card {
-    position: relative;
+  .el-row {
+    padding: 20px 0;
+    /deep/ .el-card {
+      position: relative;
 
-    height: 260px;
-    width: 160px;
-  }
-  /deep/ .el-card__body {
-    padding: 0;
+      height: 260px;
+      width: 160px;
+      margin-bottom: 12px;
+    }
+    /deep/ .el-card__body {
+      padding: 0;
+    }
   }
 }
 
@@ -189,6 +191,6 @@ export default {
   width: 100%;
   height: 44px;
   font-size: 16px;
-  /* border: solid 1px #efefef; */
+  border: none;
 }
 </style>

@@ -63,16 +63,15 @@
           <img :src="currentList.description.gallery[0]" />
           <div>
             <p>{{ currentList.name }}</p>
-            <p>类型:{{ currentList.classify.type }}</p>
-            <p>时长:{{ currentList.duration }}</p>
+            <p>{{ `类型:  ${currentList.classify.type}` }}</p>
+            <p>{{ `时长:  ${currentList.duration}` }}</p>
           </div>
         </div>
         <div class="bottom">
-          <p>影院 :{{ currentList.location[0].brand }}</p>
-          <p>影厅 :{{ currentList.location[0].room }}</p>
-          <!-- <p>版本 :{{ currentList.location[0]. }}</p> -->
-          <p>场次 :{{ currentList.location[0].date }}</p>
-          <p>票价 :{{ currentList.location[0].price }}</p>
+          <p>{{ `影院 :  ${currentList.location[0].brand} ` }}</p>
+          <p>{{ `影厅 :   ${currentList.location[0].room} ` }}</p>
+          <p>{{ `场次 :  ${currentList.location[0].date} ` }}</p>
+          <p>{{ `票价 :  ${currentList.location[0].price} ` }}</p>
           <div>
             座位 :
             <template v-for="(itemIndex, index) of seatList">
@@ -83,7 +82,7 @@
               </template>
             </template>
           </div>
-          <p>总价 :{{ totalPrice }} ￥</p>
+          <p>{{ `总价 :  ${totalPrice} ` }} ￥</p>
         </div>
         <el-button @click="goStep3">确认选座</el-button>
       </div>
@@ -99,13 +98,7 @@ export default {
   data() {
     return {
       currentList: {},
-      seatList: [
-        // ["false", "false", "false", "false", "false", "false"],
-        // ["false", "false", "false", "false", "false", "false"],
-        // ["false", "false", "true", "false", "false", "false"],
-        // ["false", "false", "false", "false", "false", "false"],
-        // ["false", "false", "false", "true", "false", "false"],
-      ],
+      seatList: [],
     };
   },
   created() {
@@ -116,8 +109,6 @@ export default {
     this.$root.buyTicket = [];
 
     this.seatList = this.currentList.location[0].seats;
-    // console.log('setp2', this.currentList);
-    // this.seatList = this.currentList.location[0].seats;
   },
   components: { ProgressBar },
   computed: {
@@ -137,8 +128,7 @@ export default {
     seatClick(e, tr, td) {
       if (e.target.classList[0] === "false") {
         e.target.classList = "selected";
-        // console.log(this.seatList[tr][td]);
-        // this.seatList[tr][td] = 'selected';
+
         this.$set(this.seatList[tr], td, "selected");
       } else if (e.target.classList[0] === "selected") {
         e.target.classList = "false";
@@ -306,6 +296,8 @@ export default {
   .right {
     width: 25%;
     background-color: #f9f9f9;
+    box-sizing: border-box;
+    padding: 5px 10px;
     .top {
       display: flex;
       justify-content: flex-start;
@@ -313,6 +305,7 @@ export default {
       img {
         width: 64px;
         height: 90px;
+        margin-right: 20px;
       }
     }
     .bottom {
@@ -334,6 +327,9 @@ export default {
         background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAeCAYAAABwmH1PAAAAAXNSR0IArs4c6QAAAXlJREFUWAlj/Oho7cXAzLTg/89fogzDGDCys71m+PsvgeGji+2r38eP/h/u4Pexo/9BfmUCxSyLhdUwjluI11gsrRhAfmUa9j5F8+Coh9ECZNhxR2N42EUpmodGZgx/TYz9+nvzhn9ogTEsuUysDGxS/548jP4+qe/0l6zUL//fvh2WHoV5ihHGALa0GD872rQxamrm8EybzQMTH070RzsLBngeZmRk/M+7/0jVv9s3rw7n5A33MCgmQZ4GRnn7r3Vrvw+nmEX2C4qHQRLMPxlO/X38kA1Z0XBiY3h4OHkOm18wPPyXncGMWVb+FzbFw0EMxcOgkvo/A0MlW1Aw53DwHDY/wD0Mq5aYVNW1WX0D4OLYNA1lMZavtraSoGT8ydWukklTU5u7uWNY1sGwSGL5zfDrGYuM6ldQMh7OMQv3MIjBPX8xN0xguNPDNq/iirhRD+MKmeEiPhrDwyUmcflj5MUwaM7lz/FjuAJk2IiD/AjyK+NIm0wDAACxUs8MaULTAAAAAElFTkSuQmCC)
           no-repeat;
       }
+    }
+    .el-button {
+      width: 100%;
     }
   }
 }
